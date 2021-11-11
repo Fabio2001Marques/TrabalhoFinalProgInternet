@@ -1,9 +1,168 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Business Frontpage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/css/styles_home_page.css" rel="stylesheet" />
+</head>
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-</div>
+    <header class="bg-dark py-5">
+        <div class="container px-5">
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center my-5">
+                        <h1 class="display-5 fw-bolder text-white mb-2">Começa a organizar os teus Projetos Hoje</h1>
+                        <p class="lead text-white-50 mb-4">Gere os teus projetos de forma fácil e eficaz.</p>
+                        @*Butões no header*@
+                        @*<div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Features section-->
+    <section class="py-5 border-bottom" id="features">
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-person"></i></div>
+                    <h2 class="h4 fw-bolder">Colaboradores</h2>
+                    <p>Não trabalhe sozinho, adicione os seus colaboradores aos seus projetos.</p>
+                </div>
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-clipboard"></i></div>
+                    <h2 class="h4 fw-bolder">Múltiplos Projetos</h2>
+                    <p>Não se limite a um só projeto, desafie-se!</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-watch"></i></div>
+                    <h2 class="h4 fw-bolder">Aproveite melhor o seu tempo</h2>
+                    <p>Organize melhor a sua agenda definindo datas para finalizar as suas tarefas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials section-->
+    <section class="py-5 border-bottom">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bolder">Torne o seu trabalho mais dinâmico.</h2>
+            </div>
+            <div class="row gx-5">
+                <div class="col-lg-3 mb-5 mb-lg-0 mt-3">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-graph-up"></i></div>
+                    <h2 class="h4 fw-bolder">Planeamento</h2>
+                    <p>Crie User Stories, planeie sprints e distribua tarefas para sua equipa.</p>
+                </div>
+                <div class="col-lg-3 mb-5 mb-lg-0 mt-3">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-card-checklist"></i></div>
+                    <h2 class="h4 fw-bolder">Acompanhamento</h2>
+                    <p>Priorize e discuta o trabalho da sua equipa em contexto completo, mantendo um olhar atento sobre a mesma.</p>
+                </div>
+                <div class="col-lg-3 mb-5 mb-lg-0 mt-3">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-file-earmark-check"></i></div>
+                    <h2 class="h4 fw-bolder">Entregas</h2>
+                    <p>Mantenha as informações atualizadas com base os relatórios dos seus colaboradores.</p>
+                </div>
+                <div class="col-lg-3 mt-3">
+                    <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-card-text"></i></div>
+                    <h2 class="h4 fw-bolder">Relatórios</h2>
+                    <p>Melhore o desempenho da equipa usando dados visuais disponíveis em tempo real para a sua equipa colocar em uso.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact section-->
+    <section class="bg-light py-5">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+                <div class="feature bg-secondary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+                <h2 class="fw-bolder">Contacte-nos</h2>
+                <p class="lead mb-0">Valorizamos a sua opinião.</p>
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <!-- Name input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="name" type="text" placeholder="Insira o seu nome..." data-sb-validations="required" />
+                            <label for="name">Nome Completo</label>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Preencha este campo.</div>
+                        </div>
+                        <!-- Email address input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                            <label for="email">Email</label>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Preencha este campo.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Introduza um Email válido.</div>
+                        </div>
+                        <!-- Phone number input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="phone" type="tel" placeholder="(+351) 915478365" data-sb-validations="required" />
+                            <label for="phone">Contacto</label>
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">Preencha este campo.</div>
+                        </div>
+                        <!-- Message input-->
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="message" type="text" placeholder="Insira a sua mensagem..." style="height: 10rem" data-sb-validations="required"></textarea>
+                            <label for="message">Mensagem</label>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Preencha este campo.</div>
+                        </div>
+                        <!-- Submit success message-->
+                        <!---->
+                        <!-- This is what your users will see when the form-->
+                        <!-- has successfully submitted-->
+                        <div class="d-none" id="submitSuccessMessage">
+                            <div class="text-center mb-3">
+                                <div class="fw-bolder">Mensagem</div>
+                            </div>
+                        </div>
+                        <!-- Submit error message-->
+                        <!---->
+                        <!-- This is what your users will see when there is-->
+                        <!-- an error submitting the form-->
+                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Erro ao enviar mensagem!</div></div>
+                        <!-- Submit Button-->
+                        <div class="d-grid"><button class="btn btn-secondary btn-lg disabled" id="submitButton" type="submit" class="text-white">Enviar</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>
