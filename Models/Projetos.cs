@@ -11,7 +11,7 @@ namespace TrabalhoFinalProgInternet.Models
     {
         public int ProjetosID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ("Preencha o campo Nome do projeto"))]
         [StringLength(256)]
         [DisplayName("Nome do projeto")]
         public string Name { get; set; }
