@@ -9,7 +9,7 @@ namespace TrabalhoFinalProgInternet.Models
 {
     public class Tarefas
     {
-        public int TarefasId { get; set; }
+        public int TarefaId { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [StringLength(256, ErrorMessage = "Insira um nome com até 256 carateres")]
@@ -29,6 +29,6 @@ namespace TrabalhoFinalProgInternet.Models
         public DateTime DataDeFim { get; set; }
 
 
-        //TODO: A dicionar chave estrangeira para o model Projetos
+        //TODO: A dicionar chave estrangeira para o model Projeto
     }
 }
