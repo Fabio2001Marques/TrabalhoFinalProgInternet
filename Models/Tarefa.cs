@@ -28,7 +28,9 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Data de Finalização")]
         public DateTime DataDeFim { get; set; }
 
+        [DisplayName ("Projeto")]
+        public int ProjetoId { get; set; }
 
-        //TODO: A dicionar chave estrangeira para o model Projeto
+        public Projeto Nome { get; set; }
     }
 }
