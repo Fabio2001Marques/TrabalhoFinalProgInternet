@@ -28,7 +28,10 @@ namespace TrabalhoFinalProgInternet.Models
         [EmailAddress(ErrorMessage ="Email inválido")]
         public string Email { get; set; }
 
-        //TODO Falta chave estrangeira para a tabela Job
+        [DisplayName("Função")]
+        public int JobId { get; set; }
+
+        public Tarefa Nome { get; set; }
 
     }
 }

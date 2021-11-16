@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrabalhoFinalProgInternet.Models
 {
-    public class Tarefas
+    public class Tarefa
     {
         public int TarefaId { get; set; }
 
