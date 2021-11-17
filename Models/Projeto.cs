@@ -25,7 +25,7 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Data Final")]
         public DateTime DataFinal { get; set; }
 
-        //TODO: Chave estrangeira da tabela intermédia
+        public ICollection<ColaboradorProjeto> ProjetoColaboradores { get; set; }
 
     }
 }
