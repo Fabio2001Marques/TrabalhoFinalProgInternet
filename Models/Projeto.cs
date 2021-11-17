@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace TrabalhoFinalProgInternet.Models
 {
-    public class Projetos
+    public class Projeto
     {
         public int ProjetosId { get; set; }
 
         [Required(ErrorMessage = ("Preencha o campo Nome do projeto"))]
         [StringLength(256)]
         [DisplayName("Nome do projeto")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = ("Preencha o campo Nome do projeto"))]
         [DataType(DataType.Date)]
