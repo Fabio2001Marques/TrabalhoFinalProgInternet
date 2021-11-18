@@ -20,5 +20,7 @@ namespace TrabalhoFinalProgInternet.Data
                 .HasKey(cp => new { cp.ColaboradorId, cp.ProjetoId });
         }
 
+        public DbSet<TrabalhoFinalProgInternet.Models.Colaborador> Colaborador { get; set; }
+
     }
 }
