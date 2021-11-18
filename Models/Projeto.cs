@@ -9,7 +9,7 @@ namespace TrabalhoFinalProgInternet.Models
 {
     public class Projeto
     {
-        public int ProjetosId { get; set; }
+        public int ProjetoId { get; set; }
 
         [Required(ErrorMessage = ("Preencha o campo Nome do projeto"))]
         [StringLength(256)]
