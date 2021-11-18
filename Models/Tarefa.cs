@@ -31,6 +31,6 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName ("Projeto")]
         public int ProjetoId { get; set; }
 
-        public Projeto Nome { get; set; }
+        public Projeto NomeProjeto { get; set; }
     }
 }

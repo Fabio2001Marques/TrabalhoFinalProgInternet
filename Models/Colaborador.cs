@@ -31,7 +31,7 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Função")]
         public int JobId { get; set; }
 
-        public Tarefa Nome { get; set; }
+        public Job Nome { get; set; }
 
         public ICollection<ColaboradorProjeto> ColaboradorProjetos { get; set; }
 
