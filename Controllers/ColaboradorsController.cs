@@ -10,11 +10,11 @@ using TrabalhoFinalProgInternet.Models;
 
 namespace TrabalhoFinalProgInternet
 {
-    public class ColaboradorsController : Controller
+    public class ColaboradoresController : Controller
     {
         private readonly GestorProjetosContext _context;
 
-        public ColaboradorsController(GestorProjetosContext context)
+        public ColaboradoresController(GestorProjetosContext context)
         {
             _context = context;
         }
@@ -48,7 +48,7 @@ namespace TrabalhoFinalProgInternet
         // GET: Colaboradors/Create
         public IActionResult Create()
         {
-            ViewData["JobId"] = new SelectList(_context.Set<Job>(), "JobId", "Nome");
+            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "Cargo", "cargo");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,JobId")] Colaborador colaborador)
+        public async Task<IActionResult> Create([Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace TrabalhoFinalProgInternet
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobId"] = new SelectList(_context.Set<Job>(), "JobId", "Nome", colaborador.JobId);
+            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
             return View(colaborador);
         }
 
@@ -82,7 +82,7 @@ namespace TrabalhoFinalProgInternet
             {
                 return NotFound();
             }
-            ViewData["JobId"] = new SelectList(_context.Set<Job>(), "JobId", "Nome", colaborador.JobId);
+            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
             return View(colaborador);
         }
 
@@ -91,7 +91,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,JobId")] Colaborador colaborador)
+        public async Task<IActionResult> Edit(int id, [Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
         {
             if (id != colaborador.ColaboradorId)
             {
@@ -118,7 +118,7 @@ namespace TrabalhoFinalProgInternet
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["JobId"] = new SelectList(_context.Set<Job>(), "JobId", "Nome", colaborador.JobId);
+            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
             return View(colaborador);
         }
 
