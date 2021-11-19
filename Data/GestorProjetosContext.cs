@@ -22,5 +22,7 @@ namespace TrabalhoFinalProgInternet.Data
 
         public DbSet<TrabalhoFinalProgInternet.Models.Colaborador> Colaborador { get; set; }
 
+        public DbSet<TrabalhoFinalProgInternet.Models.Projeto> Projeto { get; set; }
+
     }
 }
