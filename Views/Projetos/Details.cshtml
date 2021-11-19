@@ -10,22 +10,34 @@
     <h4>Projeto</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gestor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gestor)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataInicio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataPrevista)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataPrevista)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataFinal)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataFinal)
         </dd>
     </dl>
