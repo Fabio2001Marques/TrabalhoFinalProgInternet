@@ -13,7 +13,7 @@ namespace TrabalhoFinalProgInternet.Models
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [StringLength(128, ErrorMessage ="O seu nome não pode conter mais do que 128 caracteres")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Cartão de cidadão")]
         [StringLength(8, MinimumLength = 8, ErrorMessage ="Número de CC inválido")]
@@ -28,10 +28,10 @@ namespace TrabalhoFinalProgInternet.Models
         [EmailAddress(ErrorMessage ="Email inválido")]
         public string Email { get; set; }
 
-        [DisplayName("Função")]
-        public int JobId { get; set; }
+        [DisplayName("Cargo")]
+        public int CargoId { get; set; }
 
-        public Job Nome { get; set; }
+        public Cargo Cargo { get; set; }
 
         public ICollection<ColaboradorProjeto> ColaboradorProjetos { get; set; }
 
