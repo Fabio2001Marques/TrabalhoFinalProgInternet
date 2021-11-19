@@ -26,5 +26,7 @@ namespace TrabalhoFinalProgInternet.Data
 
         public DbSet<TrabalhoFinalProgInternet.Models.Tarefa> Tarefa { get; set; }
 
+        public DbSet<TrabalhoFinalProgInternet.Models.Cargo> Cargo { get; set; }
+
     }
 }
