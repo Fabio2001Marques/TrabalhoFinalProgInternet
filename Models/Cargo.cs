@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace TrabalhoFinalProgInternet.Models
 {
-    public class Job
+    public class Cargo
     {
-        public int JobId { get; set; }
+        public int CargoId { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
-        public string Nome { get; set; }
+        public string cargo { get; set; }
     }
 }
