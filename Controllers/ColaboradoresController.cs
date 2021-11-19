@@ -22,8 +22,7 @@ namespace TrabalhoFinalProgInternet
         // GET: Colaboradors
         public async Task<IActionResult> Index()
         {
-            var gestorProjetosContext = _context.Colaborador.Include(c => c.Nome);
-            return View(await gestorProjetosContext.ToListAsync());
+            return View(await _context.Colaborador.ToListAsync());
         }
 
         // GET: Colaboradors/Details/5
