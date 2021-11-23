@@ -57,7 +57,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataDeInicio,DataPrevista,DataDeFim,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,ProjetoId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,DataDeInicio,DataPrevista,DataDeFim,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,ProjetoId")] Tarefa tarefa)
         {
             if (id != tarefa.TarefaId)
             {
