@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
 
-namespace TrabalhoFinalProgInternet
+namespace TrabalhoFinalProgInternet.Controllers
 {
     public class ColaboradoresController : Controller
     {
@@ -19,13 +19,14 @@ namespace TrabalhoFinalProgInternet
             _context = context;
         }
 
-        // GET: Colaboradors
+        // GET: Colaboradores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Colaborador.ToListAsync());
+            var gestorProjetosContext = _context.Colaborador.Include(c => c.Cargo);
+            return View(await gestorProjetosContext.ToListAsync());
         }
 
-        // GET: Colaboradors/Details/5
+        // GET: Colaboradores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,7 +35,7 @@ namespace TrabalhoFinalProgInternet
             }
 
             var colaborador = await _context.Colaborador
-                .Include(c => c.Nome)
+                .Include(c => c.Cargo)
                 .FirstOrDefaultAsync(m => m.ColaboradorId == id);
             if (colaborador == null)
             {
@@ -44,19 +45,19 @@ namespace TrabalhoFinalProgInternet
             return View(colaborador);
         }
 
-        // GET: Colaboradors/Create
+        // GET: Colaboradores/Create
         public IActionResult Create()
         {
-            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "Cargo", "cargo");
+            ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome");
             return View();
         }
 
-        // POST: Colaboradors/Create
+        // POST: Colaboradores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
+        public async Task<IActionResult> Create([Bind("ColaboradorId,Nome,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
         {
             if (ModelState.IsValid)
             {
@@ -64,11 +65,11 @@ namespace TrabalhoFinalProgInternet
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
+            ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
             return View(colaborador);
         }
 
-        // GET: Colaboradors/Edit/5
+        // GET: Colaboradores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,16 +82,16 @@ namespace TrabalhoFinalProgInternet
             {
                 return NotFound();
             }
-            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
+            ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
             return View(colaborador);
         }
 
-        // POST: Colaboradors/Edit/5
+        // POST: Colaboradores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ColaboradorId,Name,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
+        public async Task<IActionResult> Edit(int id, [Bind("ColaboradorId,Nome,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
         {
             if (id != colaborador.ColaboradorId)
             {
@@ -117,11 +118,11 @@ namespace TrabalhoFinalProgInternet
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CargoId"] = new SelectList(_context.Set<Cargo>(), "CargoId", "cargo", colaborador.CargoId);
+            ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
             return View(colaborador);
         }
 
-        // GET: Colaboradors/Delete/5
+        // GET: Colaboradores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,7 +131,7 @@ namespace TrabalhoFinalProgInternet
             }
 
             var colaborador = await _context.Colaborador
-                .Include(c => c.Nome)
+                .Include(c => c.Cargo)
                 .FirstOrDefaultAsync(m => m.ColaboradorId == id);
             if (colaborador == null)
             {
@@ -140,7 +141,7 @@ namespace TrabalhoFinalProgInternet
             return View(colaborador);
         }
 
-        // POST: Colaboradors/Delete/5
+        // POST: Colaboradores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
