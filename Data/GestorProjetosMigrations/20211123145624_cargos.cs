@@ -6,12 +6,18 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.RenameColumn(
+                name: "cargo",
+                table: "Cargo",
+                newName: "Nome");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.RenameColumn(
+                name: "Nome",
+                table: "Cargo",
+                newName: "cargo");
         }
     }
 }

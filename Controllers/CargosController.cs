@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
 
-namespace TrabalhoFinalProgInternet
+namespace TrabalhoFinalProgInternet.Controllers
 {
     public class CargosController : Controller
     {
@@ -54,7 +54,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CargoId,cargo")] Cargo cargo)
+        public async Task<IActionResult> Create([Bind("CargoId,Nome")] Cargo cargo)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CargoId,cargo")] Cargo cargo)
+        public async Task<IActionResult> Edit(int id, [Bind("CargoId,Nome")] Cargo cargo)
         {
             if (id != cargo.CargoId)
             {
