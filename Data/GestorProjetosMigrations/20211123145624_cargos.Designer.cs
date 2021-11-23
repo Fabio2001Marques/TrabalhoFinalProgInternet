@@ -10,7 +10,7 @@ using TrabalhoFinalProgInternet.Data;
 namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 {
     [DbContext(typeof(GestorProjetosContext))]
-    [Migration("20211120000335_cargos")]
+    [Migration("20211123145624_cargos")]
     partial class cargos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("cargo")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
