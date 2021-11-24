@@ -1,12 +1,12 @@
 ﻿@model TrabalhoFinalProgInternet.Models.Projeto
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Projeto";
 }
 
-<h1>Delete</h1>
+<h1 class="text-danger font-weight-bold">Eliminar Colaborador</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="text-danger">Tem a certeza que quer eliminar este colaborador?</h3>
 <div>
     <h4>Projeto</h4>
     <hr />
@@ -43,7 +43,7 @@
             @Html.DisplayFor(model => model.DataFinal)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProjetoId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
