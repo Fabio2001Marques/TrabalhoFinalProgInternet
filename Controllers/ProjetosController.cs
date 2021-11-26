@@ -58,6 +58,7 @@ namespace TrabalhoFinalProgInternet
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -31,33 +31,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataInicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataPrevista)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataFinal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.colaborador.Nome)
-                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPrevista)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFinal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.colaborador.Nome)
+                </td>
 
 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ProjetoId">Editâr</a> |
-                        <a asp-action="Details" asp-route-id="@item.ProjetoId">Detalhes</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ProjetoId">Eliminar</a>  |
-                        <a asp-controller="Tarefas" asp-action="Index" class="btn btn-secondary">Criar Tarefa</a>
+                ViewBag.ProjetoID = item.ProjetoId;
+                ViewBag.ProjetoNome = item.Nome;
 
-                    </td>
-                </tr>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProjetoId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProjetoId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProjetoId">Eliminar</a>  |
+                    <a asp-controller="Tarefas" asp-action="Create" class="btn btn-secondary">Criar Tarefa</a>
+
+                </td>
+            </tr>
             }
         </tbody>
     </table>
