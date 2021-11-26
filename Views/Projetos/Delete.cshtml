@@ -4,49 +4,55 @@
     ViewData["Title"] = "Eliminar Projeto";
 }
 
-<h1 class="text-danger font-weight-bold">Eliminar Colaborador</h1>
 
-<h3 class="text-danger">Tem a certeza que quer eliminar este colaborador?</h3>
-<div>
-    <h4>Projeto</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Gestor)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Gestor)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInicio)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataInicio)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataPrevista)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataPrevista)
-        </dd>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataFinal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataFinal)
-        </dd>
-    </dl>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ProjetoId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-    </form>
+<div class="container mt-4">
+    <h1 class="text-danger font-weight-bold">Eliminar Projeto</h1>
+
+    <h3 class="text-danger">Tem a certeza que quer eliminar este projeto?</h3>
+    <div>
+        <h4>Projeto</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataInicio)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DataPrevista)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataPrevista)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DataFinal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DataFinal)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.colaborador)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.colaborador.Nome)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ProjetoId" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
 </div>

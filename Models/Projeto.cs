@@ -16,11 +16,6 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Nome do projeto")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = ("Preencha com o nome do Responsável/Gestor"))]
-        [StringLength(256)]
-        [DisplayName("Nome do Responsável")]
-        public string Gestor { get; set; }
-
         [Required(ErrorMessage = ("Preencha a Data do inicio do projeto"))]
         [DataType(DataType.Date)]
         [DisplayName("Data Inicio")]
@@ -36,7 +31,11 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Data Final")]
         public DateTime DataFinal { get; set; }
 
+        [Required(ErrorMessage = ("Preencha com o nome do Responsável/Gestor"))]
+        [DisplayName("Gestor")]
+        public int ColaboradorId { get; set; }
 
+        public Colaborador colaborador { get; set; }
 
 
         public ICollection<ColaboradorProjeto> ProjetoColaboradores { get; set; }
