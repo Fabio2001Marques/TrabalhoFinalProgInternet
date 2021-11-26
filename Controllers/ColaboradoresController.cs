@@ -63,7 +63,10 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 _context.Add(colaborador);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Controller = "Colaboradores";
+                ViewBag.Title = "Adicionado Colaborador";
+                ViewBag.Message = "Colaborador Adicioado com Sucesso";
+                return View("Sucesso");
             }
             ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
             return View(colaborador);
