@@ -61,7 +61,10 @@ namespace TrabalhoFinalProgInternet
 
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Controller = "Projetos";
+                ViewBag.Title = "Adicionado Projeto";
+                ViewBag.Message = "Projeto Adicioado com Sucesso";
+                return View("Sucesso");
             }
             return View(projeto);
         }
