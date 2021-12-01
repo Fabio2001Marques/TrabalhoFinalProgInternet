@@ -24,6 +24,5 @@ namespace TrabalhoFinalProgInternet.Models
 
         public Projeto Projeto { get; set; }
 
-        public ICollection<TarefaProjeto> TarefaProjetos { get; set; }
     }
 }
