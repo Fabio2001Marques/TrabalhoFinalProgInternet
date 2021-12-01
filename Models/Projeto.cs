@@ -36,11 +36,9 @@ namespace TrabalhoFinalProgInternet.Models
         public int ColaboradorId { get; set; }
 
         public Colaborador colaborador { get; set; }
-
+        
 
         public ICollection<ColaboradorProjeto> ProjetoColaboradores { get; set; }
-
-        public ICollection<TarefaProjeto> ProjetoTarefas { get; set; }
 
     }
 }

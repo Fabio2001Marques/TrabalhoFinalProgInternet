@@ -29,19 +29,6 @@ namespace TrabalhoFinalProgInternet.Data
                 .WithMany(p => p.ProjetoColaboradores)
                 .HasForeignKey(cp => cp.ProjetoId);
 
-            modelBuilder.Entity<TarefaProjeto>()
-                .HasKey(tp => new { tp.TarefaId, tp.ProjetoId });
-
-            modelBuilder.Entity<TarefaProjeto>()
-                .HasOne(tp => tp.Tarefa)
-                .WithMany(t => t.TarefaProjetos)
-                .HasForeignKey(tp => tp.TarefaId);
-
-            modelBuilder.Entity<TarefaProjeto>()
-                .HasOne(tp => tp.Projeto)
-                .WithMany(p => p.ProjetoTarefas)
-                .HasForeignKey(tp => tp.ProjetoId);
-
 
             var foreignKeysWithCascadeDelete = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetForeignKeys())
@@ -69,7 +56,6 @@ namespace TrabalhoFinalProgInternet.Data
 
         public DbSet<TrabalhoFinalProgInternet.Models.ColaboradorProjeto> ColaboradorProjeto { get; set; }
 
-        public DbSet<TrabalhoFinalProgInternet.Models.TarefaProjeto> TarefaProjetos { get; set; }
 
     }
 }
