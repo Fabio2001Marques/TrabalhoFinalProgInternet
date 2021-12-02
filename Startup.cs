@@ -41,7 +41,7 @@ namespace TrabalhoFinalProgInternet
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GestorProjetosContext gestorContext)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +69,7 @@ namespace TrabalhoFinalProgInternet
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-        }
+            SeedData.Populate(gestorContext);
+        }      
     }
 }
