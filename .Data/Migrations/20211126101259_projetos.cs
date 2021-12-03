@@ -47,11 +47,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 table: "Projeto",
                 column: "ColaboradorId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_TarefaProjetos_ProjetoId",
-                table: "TarefaProjetos",
-                column: "ProjetoId");
-
             migrationBuilder.AddForeignKey(
                 name: "FK_Colaborador_Cargo_CargoId",
                 table: "Colaborador",
