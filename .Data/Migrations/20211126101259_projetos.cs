@@ -19,10 +19,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 name: "FK_ColaboradorProjeto_Projeto_ProjetoId",
                 table: "ColaboradorProjeto");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tarefa_Projeto_ProjetoId",
-                table: "Tarefa");
-
             migrationBuilder.DropColumn(
                 name: "DataDeFim",
                 table: "Tarefa");
@@ -45,40 +41,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
-
-            migrationBuilder.CreateTable(
-                name: "TarefaProjetos",
-                columns: table => new
-                {
-                    TarefaId = table.Column<int>(type: "int", nullable: false),
-                    ProjetoId = table.Column<int>(type: "int", nullable: false),
-                    DataDeInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataPrevista = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataDeFim = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ColaboradorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TarefaProjetos", x => new { x.TarefaId, x.ProjetoId });
-                    table.ForeignKey(
-                        name: "FK_TarefaProjetos_Colaborador_ColaboradorId",
-                        column: x => x.ColaboradorId,
-                        principalTable: "Colaborador",
-                        principalColumn: "ColaboradorId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TarefaProjetos_Projeto_ProjetoId",
-                        column: x => x.ProjetoId,
-                        principalTable: "Projeto",
-                        principalColumn: "ProjetoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TarefaProjetos_Tarefa_TarefaId",
-                        column: x => x.TarefaId,
-                        principalTable: "Tarefa",
-                        principalColumn: "TarefaId",
-                        onDelete: ReferentialAction.Restrict);
-                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projeto_ColaboradorId",
