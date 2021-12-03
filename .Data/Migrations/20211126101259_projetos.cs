@@ -48,11 +48,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 column: "ColaboradorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TarefaProjetos_ColaboradorId",
-                table: "TarefaProjetos",
-                column: "ColaboradorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TarefaProjetos_ProjetoId",
                 table: "TarefaProjetos",
                 column: "ProjetoId");
