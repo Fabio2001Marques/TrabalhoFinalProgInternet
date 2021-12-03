@@ -48,7 +48,7 @@ namespace TrabalhoFinalProgInternet
         // GET: Tarefas/Create
         public IActionResult Create()
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Gestor");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,DataInicio,DataFim,ProjetoId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace TrabalhoFinalProgInternet
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Gestor", tarefa.ProjetoId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
             return View(tarefa);
         }
 
@@ -82,7 +82,7 @@ namespace TrabalhoFinalProgInternet
             {
                 return NotFound();
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Gestor", tarefa.ProjetoId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
             return View(tarefa);
         }
 
@@ -91,7 +91,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,DataInicio,DataFim,ProjetoId")] Tarefa tarefa)
         {
             if (id != tarefa.TarefaId)
             {
@@ -118,7 +118,7 @@ namespace TrabalhoFinalProgInternet
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Gestor", tarefa.ProjetoId);
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
             return View(tarefa);
         }
 

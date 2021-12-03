@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
     <h4>Tarefa</h4>
@@ -23,14 +23,38 @@
             @Html.DisplayFor(model => model.Descricao)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataPrevistaInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataPrevistaInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataPrevistaFim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataPrevistaFim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataInicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataInicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DataFim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DataFim)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Projeto)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Projeto.colaborador.Nome)
+            @Html.DisplayFor(model => model.Projeto.Nome)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.TarefaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar á lista</a>
 </div>
