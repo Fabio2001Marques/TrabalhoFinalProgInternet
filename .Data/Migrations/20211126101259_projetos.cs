@@ -106,10 +106,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 name: "FK_Projeto_Colaborador_ColaboradorId",
                 table: "Projeto");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tarefa_Projeto_ProjetoId",
-                table: "Tarefa");
-
             migrationBuilder.DropTable(
                 name: "TarefaProjetos");
 
