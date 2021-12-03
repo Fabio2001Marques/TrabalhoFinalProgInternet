@@ -19,6 +19,22 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
+        [Required(ErrorMessage = "Selecione a Data Prevista de Início")]
+        [DataType(DataType.Date)]
+        [DisplayName("Data Prevista de Inicio")]
+        public DateTime DataPrevistaInicio { get; set; }
+
+        [Required(ErrorMessage = "Selecione a Data Prevista de Fim")]
+        [DataType(DataType.Date)]
+        [DisplayName("Data Prevista de Fim")]
+        public DateTime DataPrevistaFim { get; set; }
+
+        [DisplayName("Data Inicio")]
+        public DateTime DataInicio { get; set; }
+
+        [DisplayName("Data Fim")]
+        public DateTime DataFim { get; set; }
+
         [DisplayName ("Projeto")]
         public int ProjetoId { get; set; }
 
