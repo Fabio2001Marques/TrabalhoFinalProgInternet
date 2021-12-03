@@ -10,7 +10,7 @@ namespace TrabalhoFinalProgInternet.Data
     {
         internal static void Populate(GestorProjetosContext gestorContext)
         {           
-
+            // Preencher Tabela Cargo
             for (int i = 1; i <= 100; i++){
                 gestorContext.Cargo.Add(
                 new Cargo
@@ -19,8 +19,10 @@ namespace TrabalhoFinalProgInternet.Data
                 }
                 ) ;
             }
+            gestorContext.SaveChanges();
             Cargo cargo = gestorContext.Cargo.FirstOrDefault();
 
+            // Preencher Tabela Colaboradores
             for (int i = 1; i <= 100; i++)
             {
                 gestorContext.Colaborador.Add(
