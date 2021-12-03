@@ -106,9 +106,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                 name: "FK_Projeto_Colaborador_ColaboradorId",
                 table: "Projeto");
 
-            migrationBuilder.DropTable(
-                name: "TarefaProjetos");
-
             migrationBuilder.DropIndex(
                 name: "IX_Projeto_ColaboradorId",
                 table: "Projeto");
@@ -165,14 +162,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_ColaboradorProjeto_Projeto_ProjetoId",
                 table: "ColaboradorProjeto",
-                column: "ProjetoId",
-                principalTable: "Projeto",
-                principalColumn: "ProjetoId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Tarefa_Projeto_ProjetoId",
-                table: "Tarefa",
                 column: "ProjetoId",
                 principalTable: "Projeto",
                 principalColumn: "ProjetoId",
