@@ -55,5 +55,6 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
             migrationBuilder.DropColumn(
                 name: "DataPrevistaInicio",
                 table: "Tarefa");
+        }
     }
 }
