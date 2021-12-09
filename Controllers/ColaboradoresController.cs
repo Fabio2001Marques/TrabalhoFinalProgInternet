@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
+using TrabalhoFinalProgInternet.ViewModels;
 
 namespace TrabalhoFinalProgInternet.Controllers
 {
@@ -20,10 +21,31 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Colaboradores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var gestorProjetosContext = _context.Colaborador.Include(c => c.Cargo);
-            return View(await gestorProjetosContext.ToListAsync());
+            //var gestorProjetosContext = _context.Colaborador.Include(c => c.Cargo);
+            //return View(await gestorProjetosContext.ToListAsync());
+            
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = _context.Colaborador.Count()
+            };
+
+            var colaboradores = await _context.Colaborador
+                            .Include(b => b.Cargo)
+                            .OrderBy(b => b.Nome)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new ColaboradorListViewModel
+                {
+                    Colaboradores = colaboradores,
+                    PagingInfo = pagingInfo
+                }
+            );
         }
 
         // GET: Colaboradores/Details/5
