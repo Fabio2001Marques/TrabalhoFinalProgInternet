@@ -46,6 +46,8 @@ namespace TrabalhoFinalProgInternet
         // GET: Projetos/Create
         public IActionResult Create()
         {
+            ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto, "ColaboradorId", "Colaborador.Nome");
+            
             return View();
         }
 
