@@ -10,12 +10,12 @@ namespace TrabalhoFinalProgInternet.Data
     {
         internal static void Populate(GestorProjetosContext gestorContext)
         {
-            
+#if TEST_PAGINATION_BOOKS
             PreencherDadosFicticiosCargo(gestorContext);
             PreencherDadosFicticiosColaboradores(gestorContext);
             PreencherDadosReaisCargo(gestorContext);
             PreencherDadosReaisColaborador(gestorContext);
-     
+#endif
         }
         private static void PreencherDadosFicticiosCargo(GestorProjetosContext gestorContext)
         {
