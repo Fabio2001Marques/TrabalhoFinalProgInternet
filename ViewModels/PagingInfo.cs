@@ -7,6 +7,7 @@ namespace TrabalhoFinalProgInternet.ViewModels
 {
     public class PagingInfo
     {
+        public const int NUMBER_PAGES_SHOW_BEFORE_AFTER = 10;
         public int TotalItems { get; set; }
         public int PageSize { get; set; } = 10;
         public int CurrentPage { get; set; }
