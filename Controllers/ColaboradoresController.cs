@@ -22,15 +22,22 @@ namespace TrabalhoFinalProgInternet.Controllers
 
         // GET: Colaboradores
         public async Task<IActionResult> Index(int page = 1)
-        {
-            //var gestorProjetosContext = _context.Colaborador.Include(c => c.Cargo);
-            //return View(await gestorProjetosContext.ToListAsync());
-            
+        {             
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
                 TotalItems = _context.Colaborador.Count()
             };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
 
             var colaboradores = await _context.Colaborador
                             .Include(b => b.Cargo)
