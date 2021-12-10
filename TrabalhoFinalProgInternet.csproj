@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include=".Data\20211210084654_projetos2.cs" />
-    <Compile Include=".Data\20211210084654_projetos2.Designer.cs" />
     <Compile Include=".Data\Migrations\20211126101259_projetos.cs" />
     <Compile Include=".Data\Migrations\20211126101259_projetos.Designer.cs" />
   </ItemGroup>
