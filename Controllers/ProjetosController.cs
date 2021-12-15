@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
+using TrabalhoFinalProgInternet.ViewModels;
 
 namespace TrabalhoFinalProgInternet
 {
@@ -20,9 +21,38 @@ namespace TrabalhoFinalProgInternet
         }
 
         // GET: Projetos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Projeto.ToListAsync());
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = _context.Colaborador.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var projetos = await _context.Projeto
+                            .Include(b => b.colaborador)
+                            .OrderBy(b => b.Nome)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new ProjetoListViewModel
+                {
+                    Projetos = projetos,
+                    PagingInfo = pagingInfo
+                }
+            );
         }
 
         // GET: Projetos/Details/5
@@ -34,6 +64,7 @@ namespace TrabalhoFinalProgInternet
             }
 
             var projeto = await _context.Projeto
+                .Include(c => c.colaborador)
                 .FirstOrDefaultAsync(m => m.ProjetoId == id);
             if (projeto == null)
             {
