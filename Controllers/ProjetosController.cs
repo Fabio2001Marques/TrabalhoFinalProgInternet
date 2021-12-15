@@ -22,7 +22,8 @@ namespace TrabalhoFinalProgInternet
         // GET: Projetos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Projeto.ToListAsync());
+            var projs = _context.Projeto.ToList();
+            return View(projs);
         }
 
         // GET: Projetos/Details/5
