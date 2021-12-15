@@ -37,7 +37,7 @@
                     <option value="1">---Seleciona---</option>
                     <option value="2">Outro</option>
                 </select>
-                <textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="1" cols="1" style="display: none"></textarea>
+                <input class="form-control" style="display: none" asp-for="NovoCargo"/>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
@@ -52,14 +52,14 @@
     function change(obj) {
         var selectBox = obj;
         var selected = selectBox.options[selectBox.selectedIndex].value;
-        var textarea = document.getElementById("text_area");
+        var input = document.getElementById("NovoCargo");
 
         if (selected === '2') {
             selectBox.style.display = "none";
-            textarea.style.display = "block";
+            input.style.display = "block";
         }
         else {
-            textarea.style.display = "none";
+            input.style.display = "none";
         }
     }
 </script>

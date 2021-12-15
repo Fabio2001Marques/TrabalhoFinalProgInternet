@@ -32,11 +32,7 @@ namespace TrabalhoFinalProgInternet.ViewModels
         [DisplayName("Cargo")]
         public int CargoId { get; set; }
 
-        public Cargo Cargo { get; set; }
-
-        public int NovoCargoId { get; set; }
-
-        public Cargo NovoCargo { get; set; }
+        public string NovoCargo { get; set; }
 
         public ICollection<ColaboradorProjeto> ColaboradorProjetos { get; set; }
 
