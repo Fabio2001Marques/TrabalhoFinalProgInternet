@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrabalhoFinalProgInternet.Data;
 
-namespace TrabalhoFinalProgInternet.Data.Migrations
+namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 {
     [DbContext(typeof(GestorProjetosContext))]
-    [Migration("20211126101259_projetos")]
+    [Migration("20211215093751_projetos")]
     partial class projetos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,6 +132,18 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaInicio")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,35 +161,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                     b.HasIndex("ProjetoId");
 
                     b.ToTable("Tarefa");
-                });
-
-            modelBuilder.Entity("TrabalhoFinalProgInternet.Models.TarefaProjeto", b =>
-                {
-                    b.Property<int>("TarefaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjetoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColaboradorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataDeFim")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataDeInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataPrevista")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("TarefaId", "ProjetoId");
-
-                    b.HasIndex("ColaboradorId");
-
-                    b.HasIndex("ProjetoId");
-
-                    b.ToTable("TarefaProjetos");
                 });
 
             modelBuilder.Entity("TrabalhoFinalProgInternet.Models.Colaborador", b =>
@@ -232,33 +215,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
                     b.Navigation("Projeto");
                 });
 
-            modelBuilder.Entity("TrabalhoFinalProgInternet.Models.TarefaProjeto", b =>
-                {
-                    b.HasOne("TrabalhoFinalProgInternet.Models.Colaborador", "Nome")
-                        .WithMany()
-                        .HasForeignKey("ColaboradorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TrabalhoFinalProgInternet.Models.Projeto", "Projeto")
-                        .WithMany("ProjetoTarefas")
-                        .HasForeignKey("ProjetoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("TrabalhoFinalProgInternet.Models.Tarefa", "Tarefa")
-                        .WithMany("TarefaProjetos")
-                        .HasForeignKey("TarefaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Nome");
-
-                    b.Navigation("Projeto");
-
-                    b.Navigation("Tarefa");
-                });
-
             modelBuilder.Entity("TrabalhoFinalProgInternet.Models.Colaborador", b =>
                 {
                     b.Navigation("ColaboradorProjetos");
@@ -267,13 +223,6 @@ namespace TrabalhoFinalProgInternet.Data.Migrations
             modelBuilder.Entity("TrabalhoFinalProgInternet.Models.Projeto", b =>
                 {
                     b.Navigation("ProjetoColaboradores");
-
-                    b.Navigation("ProjetoTarefas");
-                });
-
-            modelBuilder.Entity("TrabalhoFinalProgInternet.Models.Tarefa", b =>
-                {
-                    b.Navigation("TarefaProjetos");
                 });
 #pragma warning restore 612, 618
         }

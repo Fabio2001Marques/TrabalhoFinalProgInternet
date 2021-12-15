@@ -1,4 +1,4 @@
-﻿@model TrabalhoFinalProgInternet.Models.Colaborador
+﻿@model TrabalhoFinalProgInternet.ViewModels.ColaboradorViewModel
 
 @{
     ViewData["Title"] = "Adicionar Colaborador";
@@ -33,8 +33,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="CargoId" class="control-label"></label>
-                <select asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId"></select>
-                <a asp-controller="Cargos" asp-action="Create" class="btn btn-secondary mt-2">Criar Cargo</a>
+                <select id=cargoId asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId" onchange="change(this)">
+                    <option value="1">---Seleciona---</option>
+                    <option value="2">Outro</option>
+                </select>
+                <textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="1" cols="1" style="display: none"></textarea>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
@@ -44,6 +47,22 @@
     </div>
 </div>
     </div>
+
+<script>
+    function change(obj) {
+        var selectBox = obj;
+        var selected = selectBox.options[selectBox.selectedIndex].value;
+        var textarea = document.getElementById("text_area");
+
+        if (selected === '2') {
+            selectBox.style.display = "none";
+            textarea.style.display = "block";
+        }
+        else {
+            textarea.style.display = "none";
+        }
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
