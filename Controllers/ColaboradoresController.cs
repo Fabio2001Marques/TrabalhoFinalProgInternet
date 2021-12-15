@@ -86,10 +86,28 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColaboradorId,Nome,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
+        public async Task<IActionResult> Create(ColaboradorViewModel colaboradorViewModel)
         {
+            Colaborador colaborador = new Colaborador();
+            
             if (ModelState.IsValid)
-            {
+            {          
+                colaborador.Nome = colaboradorViewModel.Nome;
+                colaborador.NumeroCC = colaboradorViewModel.NumeroCC;
+                colaborador.Contacto = colaboradorViewModel.Contacto;
+                colaborador.Email = colaboradorViewModel.Email;
+                colaborador.CargoId = colaboradorViewModel.CargoId;
+
+                if(colaboradorViewModel.NovoCargo != null)
+                {
+                    Cargo cargo = new Cargo();
+                    cargo.Nome = colaboradorViewModel.NovoCargo;
+                    _context.Add(cargo);
+                    await _context.SaveChangesAsync();
+
+                    colaborador.CargoId = cargo.CargoId;
+                }              
+
                 _context.Add(colaborador);
                 await _context.SaveChangesAsync();
                 ViewBag.Controller = "Colaboradores";
