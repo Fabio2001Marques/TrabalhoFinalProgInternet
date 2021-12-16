@@ -1,4 +1,4 @@
-﻿//#define TEST_PAGINATION_BOOKS
+﻿#define TEST_PAGINATION_BOOKS
 using System;
 using System.Collections.Generic;
 using System.Linq;
