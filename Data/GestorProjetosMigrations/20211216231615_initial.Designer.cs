@@ -10,8 +10,8 @@ using TrabalhoFinalProgInternet.Data;
 namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 {
     [DbContext(typeof(GestorProjetosContext))]
-    [Migration("20211215093751_projetos")]
-    partial class projetos
+    [Migration("20211216231615_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
