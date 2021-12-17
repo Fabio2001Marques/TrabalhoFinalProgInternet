@@ -22,8 +22,8 @@ namespace TrabalhoFinalProgInternet
         // GET: Projetos
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _context.Projeto.ToListAsync());
+            var gestorProjetosContext = _context.Projeto.Include(t => t.colaborador);
+            return View(await gestorProjetosContext.ToListAsync());
         }
 
         // GET: Projetos/Details/5
@@ -79,6 +79,8 @@ namespace TrabalhoFinalProgInternet
         // GET: Projetos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
+          
             if (id == null)
             {
                 return NotFound();
@@ -89,6 +91,11 @@ namespace TrabalhoFinalProgInternet
             {
                 return NotFound();
             }
+            var Colaboradores = new SelectList(_context.Colaborador.Where<Colaborador>(s => s.Cargo.Nome == "Gestor"), "ColaboradorId", "Nome", "Cargo");
+
+
+            ViewData["ColaboradorId"] = Colaboradores;
+
             return View(projeto);
         }
 
