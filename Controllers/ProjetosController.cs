@@ -61,7 +61,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicio,DataFinal")] Projeto projeto)
+        public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicio,DataFinal,ColaboradorId")] Projeto projeto)
         {
             if (ModelState.IsValid)
             {

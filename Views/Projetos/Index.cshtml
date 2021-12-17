@@ -17,15 +17,17 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    Nome Projeto
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataInicio)
+                    Data Inicio
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DataFinal)
+                    Data Final
                 </th>
-                <th></th>
+                <th>
+                    Nome Colaborador
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -39,9 +41,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DataInicio)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.DataPrevista)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.DataFinal)
                 </td>
@@ -50,14 +52,12 @@
                 </td>
 
 
-                ViewBag.ProjetoID = item.ProjetoId;
-                ViewBag.ProjetoNome = item.Nome;
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ProjetoId">Editar</a> |
                     <a asp-action="Details" asp-route-id="@item.ProjetoId">Detalhes</a> |
                     <a asp-action="Delete" asp-route-id="@item.ProjetoId">Eliminar</a>  |
-                    <a asp-controller="Tarefas" asp-action="Create" class="btn btn-secondary">Criar Tarefa</a>
+                   
 
                 </td>
             </tr>
