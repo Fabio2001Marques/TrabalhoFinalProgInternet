@@ -1,4 +1,4 @@
-﻿@model TrabalhoFinalProgInternet.Models.Colaborador
+﻿@model TrabalhoFinalProgInternet.ViewModels.ColaboradorViewModel
 
 @{
     ViewData["Title"] = "Editar Colaborador";
@@ -35,8 +35,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="CargoId" class="control-label"></label>
-                <select asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId"></select>
-                <span asp-validation-for="CargoId" class="text-danger"></span>
+                <select id=cargoId asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId" onchange="change(this)">
+                    <option value="1">---Seleciona---</option>
+                    <option value="2">Outro</option>
+                </select>
+                <input class="form-control" style="display: none" asp-for="NovoCargo" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -46,6 +49,22 @@
     </div>
 </div>
 </div>
+
+<script>
+    function change(obj) {
+        var selectBox = obj;
+        var selected = selectBox.options[selectBox.selectedIndex].value;
+        var input = document.getElementById("NovoCargo");
+
+        if (selected === '2') {
+            selectBox.style.display = "none";
+            input.style.display = "block";
+        }
+        else {
+            input.style.display = "none";
+        }
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

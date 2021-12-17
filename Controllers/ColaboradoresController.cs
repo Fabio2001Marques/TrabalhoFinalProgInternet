@@ -133,7 +133,14 @@ namespace TrabalhoFinalProgInternet.Controllers
                 return NotFound();
             }
             ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
-            return View(colaborador);
+            ColaboradorViewModel colaboradorViewModel = new ColaboradorViewModel();
+            colaboradorViewModel.ColaboradorId = colaborador.ColaboradorId;
+            colaboradorViewModel.Nome = colaborador.Nome;
+            colaboradorViewModel.NumeroCC = colaborador.NumeroCC;
+            colaboradorViewModel.Contacto = colaborador.Contacto;
+            colaboradorViewModel.Email = colaborador.Email;
+            colaboradorViewModel.CargoId = colaborador.CargoId;
+            return View(colaboradorViewModel);
         }
 
         // POST: Colaboradores/Edit/5
@@ -141,15 +148,30 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ColaboradorId,Nome,NumeroCC,Contacto,Email,CargoId")] Colaborador colaborador)
+        public async Task<IActionResult> Edit(int id, ColaboradorViewModel colaboradorViewModel)
         {
-            if (id != colaborador.ColaboradorId)
+            if (id != colaboradorViewModel.ColaboradorId)
             {
                 return NotFound();
             }
-
+            Colaborador colaborador = new Colaborador();
             if (ModelState.IsValid)
             {
+                colaborador.Nome = colaboradorViewModel.Nome;
+                colaborador.NumeroCC = colaboradorViewModel.NumeroCC;
+                colaborador.Contacto = colaboradorViewModel.Contacto;
+                colaborador.Email = colaboradorViewModel.Email;
+                colaborador.CargoId = colaboradorViewModel.CargoId;
+
+                if (colaboradorViewModel.NovoCargo != null)
+                {
+                    Cargo cargo = new Cargo();
+                    cargo.Nome = colaboradorViewModel.NovoCargo;
+                    _context.Add(cargo);
+                    await _context.SaveChangesAsync();
+
+                    colaborador.CargoId = cargo.CargoId;
+                }
                 try
                 {
                     _context.Update(colaborador);
