@@ -34,7 +34,7 @@ namespace TrabalhoFinalProgInternet
                 return NotFound();
             }
 
-            var projeto = await _context.Projeto
+            var projeto = await _context.Projeto.Include(t => t.colaborador)
                 .FirstOrDefaultAsync(m => m.ProjetoId == id);
             if (projeto == null)
             {
@@ -104,7 +104,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjetoId,Nome,DataInicio,DataFinal")] Projeto projeto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjetoId,Nome,DataInicio,DataFinal,ColaboradorId")] Projeto projeto)
         {
             if (id != projeto.ProjetoId)
             {
