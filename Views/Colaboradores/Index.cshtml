@@ -6,58 +6,75 @@
 <div class="container mt-4">
     <h1>Colaboradores</h1>
 
+    @*@foreach (var colaborador in Model.Colaboradores)
+    {
+        <div class="row">
+            <div class="card mt-3 col-sm-3">
+                <div class="card-body">
+                    <h5 class="card-title">@colaborador.Nome</h5>
+                    <p class="card-text lead">@colaborador.Email</p>
+                    <p class="card-text">@colaborador.Cargo.Nome</p>
+
+                    <a asp-action="Details" asp-route-id="@colaborador.ColaboradorId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@colaborador.ColaboradorId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@colaborador.ColaboradorId" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }*@
+
     <p class="mt-3 mb-3">
-        <a asp-action="Create" class="btn btn-secondary">Adicionar Colaborador</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <p>Nome</p>
-                </th>
-                <th>
-                    <p>NumeroCC</p>
-                </th>
-                <th>
-                    <p>Contacto</p>
-                </th>
-                <th>
-                    <p>Email</p>
-                </th>
-                <th>
-                    <p>Cargo</p>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Colaboradores)
-            {
+            <a asp-action="Create" class="btn btn-secondary">Adicionar Colaborador</a>
+        </p>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumeroCC)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Contacto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cargo.Nome)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Editar</a>
-                        <a asp-action="Details" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Detalhes</a>
-                        <a asp-action="Delete" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Eliminar</a>
-                    </td>
+                    <th>
+                        <p>Nome</p>
+                    </th>
+                    <th>
+                        <p>NumeroCC</p>
+                    </th>
+                    <th>
+                        <p>Contacto</p>
+                    </th>
+                    <th>
+                        <p>Email</p>
+                    </th>
+                    <th>
+                        <p>Cargo</p>
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Colaboradores)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumeroCC)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Contacto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cargo.Nome)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Detalhes</a>
+                            <a asp-action="Delete" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 </div>
 <div class="container p-3">
     <nav class="mt-3">

@@ -7,8 +7,10 @@ namespace TrabalhoFinalProgInternet.ViewModels
 {
     public class ProjetoListViewModel
     {
+
         public IEnumerable<Projeto> Projetos { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string ProcuraNome { get; set; }
+
     }
 }

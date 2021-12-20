@@ -37,7 +37,8 @@
                     <option value="1">---Seleciona---</option>
                     <option value="2">Outro</option>
                 </select>
-                <input class="form-control" style="display: none" asp-for="NovoCargo"/>
+                <input class="form-control mt-2" style="display: none" asp-for="NovoCargo" />
+                <a id ="buttonNovoCargo" class="btn btn-secondary mt-2" style="display: none" onclick="voltar()">Voltar para selecionar Cargo</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
@@ -53,14 +54,26 @@
         var selectBox = obj;
         var selected = selectBox.options[selectBox.selectedIndex].value;
         var input = document.getElementById("NovoCargo");
+        var button = document.getElementById("buttonNovoCargo");
 
         if (selected === '2') {
-            selectBox.style.display = "none";
             input.style.display = "block";
+            input.focus();
+            button.style.display = "block";
+            selectBox.disabled = true;
         }
         else {
             input.style.display = "none";
         }
+    }
+    function voltar() {
+        var selected = document.getElementById("cargoId");
+        var input = document.getElementById("NovoCargo");
+        var button = document.getElementById("buttonNovoCargo");
+
+        button.style.display = "none";
+        input.style.display = "none";
+        selected.disabled = false;
     }
 </script>
 
