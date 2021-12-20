@@ -37,11 +37,7 @@ namespace TrabalhoFinalProgInternet.ViewModels
         public int ColaboradorId { get; set; }
 
         public ICollection<Colaborador> Colaboradores { get; set; }
-
-
-
         public ICollection<ColaboradorProjeto> ProjetoColaboradores { get; set; }
-
 
     }
 }
