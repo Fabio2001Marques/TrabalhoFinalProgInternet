@@ -98,13 +98,12 @@ namespace TrabalhoFinalProgInternet.Controllers
                 colaborador.Email = colaboradorViewModel.Email;
                 colaborador.CargoId = colaboradorViewModel.CargoId;
 
-                if(colaboradorViewModel.NovoCargo != null)
+                if((colaboradorViewModel.NovoCargo != null)||(colaboradorViewModel.NovoCargo != "---Seleciona---"))
                 {
                     Cargo cargo = new Cargo();
                     cargo.Nome = colaboradorViewModel.NovoCargo;
                     _context.Add(cargo);
                     await _context.SaveChangesAsync();
-
                     colaborador.CargoId = cargo.CargoId;
                 }              
 
