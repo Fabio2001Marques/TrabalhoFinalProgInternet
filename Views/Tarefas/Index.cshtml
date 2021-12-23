@@ -4,68 +4,66 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1>Tarefa</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPrevistaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPrevistaFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Projeto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPrevistaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPrevistaFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Projeto.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TarefaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TarefaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TarefaId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p class="mt-3 mb-3">
+        <a asp-action="Create" class="btn btn-secondary">Criar nova tarefa</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <p>Nome</p>
+                </th>
+                <th>
+                    <p>Descrição</p>
+                </th>
+                <th>
+                   <p>Data Prevista de Início</p>
+                </th>
+                <th>
+                    <p>Data Prevista de Fim</p>
+                </th>
+                <th>
+                    <p>Projeto</p>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) 
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPrevistaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPrevistaFim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataFim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Projeto.Nome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TarefaId" class="btn btn-secondary">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a>
+                        <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody> 
+    </table>
+</div>
+

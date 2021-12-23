@@ -1,12 +1,11 @@
 ﻿@model TrabalhoFinalProgInternet.Models.Tarefa
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar Tarefa";
 }
+<div class="container mt-3">
+<h1>Adicionar Tarefa</h1>
 
-<h1>Create</h1>
-
-<h4>Tarefa</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -44,7 +43,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="ProjetoId" class="control-label"></label>
-                <select asp-for="ProjetoId" class ="form-control" asp-items="ViewBag.ProjetoId"></select>
+                <select id=projetoId asp-for="ProjetoId" class="form-control" asp-items="ViewBag.ProjetoId" onchange="change(this)">
+                    <option value="1">---Seleciona---</option>
+                </select>
+                <a id ="buttonNovoCargo" class="btn btn-secondary mt-2" style="display: none" onclick="voltar()">Voltar para selecionar Cargo</a>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
