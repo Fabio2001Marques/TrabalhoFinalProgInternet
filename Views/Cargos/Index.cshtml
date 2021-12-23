@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TrabalhoFinalProgInternet.Models.Cargo>
+﻿@model CargoListViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,13 +14,13 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nome)
+                    Nome
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Cargos)
             {
                 <tr>
                     <td>
@@ -35,5 +35,59 @@
             }
         </tbody>
     </table>
-    <a asp-controller="Colaboradores" asp-action="Create" class="btn btn-secondary mt-2">Voltar para criar Colaboradores</a>
+</div>
+<div class="container p-3">
+    <nav class="mt-3">
+        <ul class="pagination ">
+            @{
+                if (Model.PagingInfo.CurrentPage == 1)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">First</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="1">First</a>
+                    </li>
+                }
+                int firstPage = Model.PagingInfo.CurrentPage - PagingInfo.NUMBER_PAGES_SHOW_BEFORE_AFTER;
+                if (firstPage < 1) firstPage = 1;
+
+                int lastPage = Model.PagingInfo.CurrentPage + PagingInfo.NUMBER_PAGES_SHOW_BEFORE_AFTER;
+                if (lastPage > Model.PagingInfo.TotalPages) lastPage = Model.PagingInfo.TotalPages;
+
+                for (int p = firstPage; p <= lastPage; p++)
+                {
+
+                    if (p == Model.PagingInfo.CurrentPage)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="#">@p <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@p">@p</a>
+                        </li>
+                    }
+                }
+                if (Model.PagingInfo.CurrentPage == Model.PagingInfo.TotalPages)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Last</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-action="Index" asp-route-page="@Model.PagingInfo.TotalPages">Last</a>
+                    </li>
+                }
+
+            }
+        </ul>
+    </nav>
 </div>

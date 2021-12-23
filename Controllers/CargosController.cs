@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
+using TrabalhoFinalProgInternet.ViewModels;
 
 namespace TrabalhoFinalProgInternet.Controllers
 {
@@ -20,9 +21,38 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Cargos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Cargo.ToListAsync());
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = _context.Cargo.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var cargos = await _context.Cargo
+                            .OrderBy(b => b.Nome)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new CargoListViewModel
+                {
+                    Cargos = cargos,
+                    PagingInfo = pagingInfo
+                }
+            );
+            //return View(await _context.Cargo.ToListAsync());
         }
 
         // GET: Cargos/Details/5
