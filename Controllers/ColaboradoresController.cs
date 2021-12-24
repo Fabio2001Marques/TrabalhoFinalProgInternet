@@ -21,12 +21,15 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Colaboradores
-        public async Task<IActionResult> Index(int page = 1)
-        {             
+        public async Task<IActionResult> Index(string nome, int page = 1)
+        {
+            var procuraColaborador = _context.Colaborador
+                .Where(b => nome == null || b.Nome.Contains(nome));
+
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Colaborador.Count()
+                TotalItems = procuraColaborador.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -39,7 +42,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 pagingInfo.CurrentPage = 1;
             }
 
-            var colaboradores = await _context.Colaborador
+            var colaboradores = await procuraColaborador
                             .Include(b => b.Cargo)
                             .OrderBy(b => b.Nome)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
@@ -50,7 +53,8 @@ namespace TrabalhoFinalProgInternet.Controllers
                 new ColaboradorListViewModel
                 {
                     Colaboradores = colaboradores,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ProcuraNome = nome
                 }
             );
         }
