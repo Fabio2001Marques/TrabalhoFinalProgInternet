@@ -53,7 +53,8 @@ namespace TrabalhoFinalProgInternet.Controllers
                 new ColaboradorListViewModel
                 {
                     Colaboradores = colaboradores,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ProcuraNome = nome
                 }
             );
         }
