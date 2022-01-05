@@ -17,20 +17,25 @@ namespace TrabalhoFinalProgInternet.ViewModels
         [DisplayName("Nome do projeto")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = ("Preencha a Data do inicio do projeto"))]
+       
         [DataType(DataType.Date)]
         [DisplayName("Data Inicio")]
-        public DateTime DataInicio { get; set; }
+        public DateTime? DataInicio { get; set; }
 
         [Required(ErrorMessage = ("Preencha com a data prevista do fim do projeto"))]
         [DataType(DataType.Date)]
         [DisplayName("Data Prevista")]
-        public DateTime DataPrevista { get; set; }
+        public DateTime DataInicialPrevista { get; set; }
+
+        [Required(ErrorMessage = ("Preencha com a data prevista do fim do projeto"))]
+        [DataType(DataType.Date)]
+        [DisplayName("Data Prevista")]
+        public DateTime DataFinalPrevista { get; set; }
 
 
         [DataType(DataType.Date)]
         [DisplayName("Data Final")]
-        public DateTime DataFinal { get; set; }
+        public DateTime? DataFinal { get; set; }
 
         [Required(ErrorMessage = ("Preencha com o nome do Responsável/Gestor"))]
         [DisplayName("Gestor")]
