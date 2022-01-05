@@ -96,8 +96,12 @@ namespace TrabalhoFinalProgInternet
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicio,DataFinal,ColaboradorId")] Projeto projeto)
         {
+
+            
             if (ModelState.IsValid)
             {
+                projeto.DataFinal = null;
+                projeto.DataPrevista = null;
 
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();

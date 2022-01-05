@@ -16,7 +16,7 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Nome do projeto")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = ("Preencha a Data do inicio do projeto"))]
+        
         [DataType(DataType.Date)]
         [DisplayName("Data Inicio")]
         public DateTime DataInicio { get; set; }
@@ -29,7 +29,7 @@ namespace TrabalhoFinalProgInternet.Models
 
         [DataType(DataType.Date)]
         [DisplayName("Data Final")]
-        public DateTime DataFinal { get; set; }
+        public DateTime? DataFinal { get; set; }
 
         [Required(ErrorMessage = ("Preencha com o nome do Responsável/Gestor"))]
         [DisplayName("Gestor")]
