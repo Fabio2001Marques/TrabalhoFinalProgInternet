@@ -101,7 +101,7 @@ namespace TrabalhoFinalProgInternet
             if (ModelState.IsValid)
             {
                 projeto.DataFinal = null;
-                projeto.DataPrevista = null;
+                projeto.DataInicio = null;
 
                 _context.Add(projeto);
                 await _context.SaveChangesAsync();
