@@ -21,12 +21,15 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Cargos
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string nome, int page = 1)
         {
+            var procuraCargo = _context.Cargo
+                .Where(b => nome == null || b.Nome.Contains(nome));
+
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Cargo.Count()
+                TotalItems = procuraCargo.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -39,7 +42,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 pagingInfo.CurrentPage = 1;
             }
 
-            var cargos = await _context.Cargo
+            var cargos = await procuraCargo
                             .OrderBy(b => b.Nome)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
@@ -49,7 +52,8 @@ namespace TrabalhoFinalProgInternet.Controllers
                 new CargoListViewModel
                 {
                     Cargos = cargos,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ProcuraNome = nome
                 }
             );
             //return View(await _context.Cargo.ToListAsync());
