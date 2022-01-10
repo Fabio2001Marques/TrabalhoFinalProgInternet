@@ -4,40 +4,33 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPrevistaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataPrevistaFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Projeto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
+<div class="container mt-4">
+    <h1>Tarefa</h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descricao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataPrevistaInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataPrevistaFim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Projeto)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -67,5 +60,6 @@
             </td>
         </tr>
 }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
