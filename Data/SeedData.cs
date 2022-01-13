@@ -86,6 +86,27 @@ namespace TrabalhoFinalProgInternet.Data
                 Projeto = gestorContext.Projeto.Find(1)
             });
 
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Realizar paginação para a tabela Tarefa",
+                Descricao = "Fazer a paginação nas views: 'create', 'details', 'edit', 'delete' e 'index'",
+                DataPrevistaInicio = new DateTime(2022, 01, 15),
+                DataPrevistaFim = new DateTime(2022, 01, 18),
+                DataInicio = null,
+                DataFim = null,
+                Projeto = gestorContext.Projeto.Find(1)
+            });
+
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Criar função 'Pesquisa'",
+                Descricao = "Criar uma função que permita a pesquisa por nome de um projeto",
+                DataPrevistaInicio = new DateTime(2022, 01, 11),
+                DataPrevistaFim = new DateTime(2022, 01, 12),
+                DataInicio = null,
+                DataFim = null,
+                Projeto = gestorContext.Projeto.Find(1)
+            });
 
             gestorContext.SaveChanges();
         }
