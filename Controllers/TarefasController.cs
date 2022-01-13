@@ -77,6 +77,77 @@ namespace TrabalhoFinalProgInternet.Controllers
 
             return View(tarefa);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Iniciar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tarefa = await _context.Tarefa
+                .Include(t => t.Projeto)
+                .FirstOrDefaultAsync(m => m.TarefaId == id);
+            if (tarefa == null)
+            {
+                return NotFound();
+            }
+            tarefa.DataInicio = new DateTime(1111, 12, 12);
+            try
+            {
+                _context.Update(tarefa);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TarefaExists(tarefa.TarefaId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+         return View(Index(""));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalizar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tarefa = await _context.Tarefa
+                .Include(t => t.Projeto)
+                .FirstOrDefaultAsync(m => m.TarefaId == id);
+            if (tarefa == null)
+            {
+                return NotFound();
+            }
+            tarefa.DataFim = new DateTime(1111, 12, 12);
+            try
+            {
+                _context.Update(tarefa);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TarefaExists(tarefa.TarefaId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View(Index(""));
+        }
 
         // GET: Tarefas/Create
         public IActionResult Create()
@@ -101,7 +172,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     _context.Add(tarefa);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                }else
+                } else
                 {
                     ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
                     ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
@@ -207,6 +278,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         private bool TarefaExists(int id)
         {
             return _context.Tarefa.Any(e => e.TarefaId == id);
-        }
+        }   
     }
-}
+  }
+
