@@ -1,4 +1,4 @@
-﻿#define TEST_PAGINATION_BOOKS
+﻿//#define TEST_PAGINATION_BOOKS
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace TrabalhoFinalProgInternet.Data
 #if TEST_PAGINATION_BOOKS
             //PreencherDadosFicticiosCargo(gestorContext);
             //PreencherDadosFicticiosColaboradores(gestorContext);
+            //PreencherDadosFicticiosTarefas(gestorContext);
             PreencherDadosReaisCargo(gestorContext);
             PreencherDadosReaisColaborador(gestorContext);
             PreencherDadosReaisTarefas(gestorContext);
@@ -38,6 +39,31 @@ namespace TrabalhoFinalProgInternet.Data
                     Email = "teste" + i + "@gmail.com",
                     NumeroCC = "12365478",
                     Cargo = cargo});
+            }
+            gestorContext.SaveChanges();
+        }
+
+        private static void PreencherDadosFicticiosTarefas(GestorProjetosContext gestorContext)
+        {
+            Projeto projeto = new Projeto();
+            projeto.Nome = "TesteTarefa";
+            projeto.DataFinalPrevista = new DateTime(2022, 01, 12);
+            projeto.DataInicialPrevista = new DateTime(2022, 01, 12);
+            projeto.DataFinal = null;
+            projeto.DataInicio = null;
+            projeto.colaborador = gestorContext.Colaborador.Find(1);
+            for (int i = 1; i <= 100; i++)
+            {
+                gestorContext.Tarefa.Add(new Tarefa
+                {
+                    Nome = "Teste" + i,
+                    Descricao = "descrição" + i,
+                    DataPrevistaInicio = new DateTime(2022, 01, 11),
+                    DataPrevistaFim = new DateTime(2022, 01, 12),
+                    DataInicio = new DateTime(2022, 01, 18),
+                    DataFim = new DateTime(2022, 01, 18),
+                    Projeto = projeto
+                });
             }
             gestorContext.SaveChanges();
         }
