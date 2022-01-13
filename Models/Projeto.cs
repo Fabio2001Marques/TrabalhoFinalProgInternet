@@ -23,12 +23,12 @@ namespace TrabalhoFinalProgInternet.Models
 
         [Required(ErrorMessage = ("Preencha com a data prevista do fim do projeto"))]
         [DataType(DataType.Date)]
-        [DisplayName("Data Prevista")]
+        [DisplayName("Data Prevista Inicial ")]
         public DateTime DataInicialPrevista { get; set; }
 
         [Required(ErrorMessage = ("Preencha com a data prevista do fim do projeto"))]
         [DataType(DataType.Date)]
-        [DisplayName("Data Prevista")]
+        [DisplayName("Data Prevista final")]
         public DateTime DataFinalPrevista { get; set; }
 
 

@@ -94,21 +94,30 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicio,DataFinal,ColaboradorId")] Projeto projeto)
+        public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicialPrevista,DataFinalPrevista,ColaboradorId")] Projeto projeto)
         {
 
-            
+
             if (ModelState.IsValid)
             {
                 projeto.DataFinal = null;
                 projeto.DataInicio = null;
+                if (projeto.DataFinalPrevista >= projeto.DataInicialPrevista)
+                {
 
-                _context.Add(projeto);
-                await _context.SaveChangesAsync();
-                ViewBag.Controller = "Projetos";
-                ViewBag.Title = "Adicionado Projeto";
-                ViewBag.Message = "Projeto Adicioado com Sucesso";
-                return View("Sucesso");
+                    _context.Add(projeto);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Controller = "Projetos";
+                    ViewBag.Title = "Adicionado Projeto";
+                    ViewBag.Message = "Projeto Adicioado com Sucesso";
+                    return View("Sucesso");
+                }
+                else
+                {
+                    ModelState.AddModelError("DataFinalPrevista", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
+
+                    return View(projeto);
+                }
             }
             return View(projeto);
         }
@@ -141,7 +150,7 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProjetoId,Nome,DataInicio,DataFinal,ColaboradorId")] Projeto projeto)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjetoId,Nome,DataInicio,DataFinal,DataInicialPrevista,DataFinalPrevista,ColaboradorId")] Projeto projeto)
         {
             if (id != projeto.ProjetoId)
             {
@@ -150,21 +159,30 @@ namespace TrabalhoFinalProgInternet
 
             if (ModelState.IsValid)
             {
-                try
+                if (projeto.DataFinalPrevista >= projeto.DataInicialPrevista)
                 {
-                    _context.Update(projeto);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        _context.Update(projeto);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!ProjetoExists(projeto.ProjetoId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProjetoExists(projeto.ProjetoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("DataFinalPrevista", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
+                    
+                    return View(projeto);
                 }
                 return RedirectToAction(nameof(Index));
             }
