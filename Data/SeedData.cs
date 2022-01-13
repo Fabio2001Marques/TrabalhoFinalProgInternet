@@ -18,6 +18,8 @@ namespace TrabalhoFinalProgInternet.Data
             PreencherDadosReaisCargo(gestorContext);
             PreencherDadosReaisColaborador(gestorContext);
             PreencherDadosReaisTarefas(gestorContext);
+            PreencherDadosReaisProjetos(gestorContext);
+            
 #endif
         }
         private static void PreencherDadosFicticiosCargo(GestorProjetosContext gestorContext)
@@ -146,6 +148,40 @@ namespace TrabalhoFinalProgInternet.Data
             gestorContext.SaveChanges();
         }
 
+        private static void PreencherDadosReaisProjetos(GestorProjetosContext gestorContext)
+        {
+           
+            gestorContext.Projeto.Add(new Projeto
+            {
+                Nome = "Obras",
+                DataFinalPrevista = new DateTime(2022, 01, 05),
+                DataInicialPrevista = new DateTime(2022, 01, 10),
+                DataInicio = null,
+                DataFinal = null,
+               colaborador = gestorContext.Colaborador.Find(1)   
+        });
+            gestorContext.Projeto.Add(new Projeto
+            {
+                Nome = "Biblioteca",
+                DataFinalPrevista = new DateTime(2022, 01, 15),
+                DataInicialPrevista = new DateTime(2022, 01, 20),
+                DataInicio = null,
+                DataFinal = null,
+                colaborador = gestorContext.Colaborador.Find(2)
+            });
+
+            gestorContext.Projeto.Add(new Projeto
+            {
+                Nome = "Jogo",
+                DataFinalPrevista = new DateTime(2022, 01, 21),
+                DataInicialPrevista = new DateTime(2022, 01, 22),
+                DataInicio = null,
+                DataFinal = null,
+                colaborador = gestorContext.Colaborador.Find(3)
+            });
+
+            gestorContext.SaveChanges();
+        }
 
 
     }    
