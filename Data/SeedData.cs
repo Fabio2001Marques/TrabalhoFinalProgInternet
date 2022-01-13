@@ -14,8 +14,10 @@ namespace TrabalhoFinalProgInternet.Data
 #if TEST_PAGINATION_BOOKS
             //PreencherDadosFicticiosCargo(gestorContext);
             //PreencherDadosFicticiosColaboradores(gestorContext);
+            //PreencherDadosFicticiosTarefas(gestorContext);
             PreencherDadosReaisCargo(gestorContext);
             PreencherDadosReaisColaborador(gestorContext);
+            PreencherDadosReaisTarefas(gestorContext);
 #endif
         }
         private static void PreencherDadosFicticiosCargo(GestorProjetosContext gestorContext)
@@ -37,6 +39,31 @@ namespace TrabalhoFinalProgInternet.Data
                     Email = "teste" + i + "@gmail.com",
                     NumeroCC = "12365478",
                     Cargo = cargo});
+            }
+            gestorContext.SaveChanges();
+        }
+
+        private static void PreencherDadosFicticiosTarefas(GestorProjetosContext gestorContext)
+        {
+            Projeto projeto = new Projeto();
+            projeto.Nome = "TesteTarefa";
+            projeto.DataFinalPrevista = new DateTime(2022, 01, 12);
+            projeto.DataInicialPrevista = new DateTime(2022, 01, 12);
+            projeto.DataFinal = null;
+            projeto.DataInicio = null;
+            projeto.colaborador = gestorContext.Colaborador.Find(1);
+            for (int i = 1; i <= 100; i++)
+            {
+                gestorContext.Tarefa.Add(new Tarefa
+                {
+                    Nome = "Teste" + i,
+                    Descricao = "descrição" + i,
+                    DataPrevistaInicio = new DateTime(2022, 01, 11),
+                    DataPrevistaFim = new DateTime(2022, 01, 12),
+                    DataInicio = new DateTime(2022, 01, 18),
+                    DataFim = new DateTime(2022, 01, 18),
+                    Projeto = projeto
+                });
             }
             gestorContext.SaveChanges();
         }
@@ -69,6 +96,52 @@ namespace TrabalhoFinalProgInternet.Data
                 Email = "rafaelsantos@gmail.com",
                 NumeroCC = "12547896",
                 Cargo = gestorContext.Cargo.Find(3)});
+
+            gestorContext.SaveChanges();
+        }
+
+        private static void PreencherDadosReaisTarefas(GestorProjetosContext gestorContext)
+        {
+            Projeto projeto = new Projeto();
+            projeto.Nome = "TesteTarefa";
+            projeto.DataFinalPrevista = new DateTime(2022, 01, 12);
+            projeto.DataInicialPrevista = new DateTime(2022, 01, 12);
+            projeto.DataFinal = null;
+            projeto.DataInicio = null;
+            projeto.colaborador = gestorContext.Colaborador.Find(1);
+
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Nova janela",
+                Descricao = "Criar uma janela que permita a visualização dos detalhes",
+                DataPrevistaInicio = new DateTime(2022,01,05),
+                DataPrevistaFim = new DateTime(2022, 01, 10),
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
+            });
+
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Realizar paginação para a tabela Tarefa",
+                Descricao = "Fazer a paginação nas views: 'create', 'details', 'edit', 'delete' e 'index'",
+                DataPrevistaInicio = new DateTime(2022, 01, 15),
+                DataPrevistaFim = new DateTime(2022, 01, 18),
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
+            });
+
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Criar função 'Pesquisa'",
+                Descricao = "Criar uma função que permita a pesquisa por nome de um projeto",
+                DataPrevistaInicio = new DateTime(2022, 01, 11),
+                DataPrevistaFim = new DateTime(2022, 01, 12),
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
+            });
 
             gestorContext.SaveChanges();
         }
