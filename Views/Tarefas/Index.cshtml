@@ -28,9 +28,6 @@
                     <p>Nome</p>
                 </th>
                 <th>
-                    <p>Descricao</p>
-                </th>
-                <th>
                     <p>DataPrevistaInicio</p>
                 </th>
                 <th>
@@ -48,30 +45,21 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.DataPrevistaInicio)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DataPrevistaFim)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataFim)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Projeto.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TarefaId" class="btn btn-secondary">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary"> Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TarefaId" class="btn btn-secondary">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
             </td>
         </tr>
-}
+        }
         </tbody>
     </table>
     <div class="container p-3">

@@ -1,9 +1,9 @@
 ﻿@model TrabalhoFinalProgInternet.Models.Tarefa
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Tarefa";
 }
-
+<div class="container mt-4">
 <h1>Eliminar Tarefa</h1>
 
 <h3>Tem a certeza que pretende apagar esta tarefa?</h3>
@@ -57,7 +57,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="TarefaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
     </form>
+</div>
 </div>

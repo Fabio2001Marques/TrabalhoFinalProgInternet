@@ -1,4 +1,4 @@
-﻿//#define TEST_PAGINATION_BOOKS
+﻿#define TEST_PAGINATION_BOOKS
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace TrabalhoFinalProgInternet.Data
             //PreencherDadosFicticiosColaboradores(gestorContext);
             PreencherDadosReaisCargo(gestorContext);
             PreencherDadosReaisColaborador(gestorContext);
+            PreencherDadosReaisTarefas(gestorContext);
 #endif
         }
         private static void PreencherDadosFicticiosCargo(GestorProjetosContext gestorContext)
@@ -75,15 +76,23 @@ namespace TrabalhoFinalProgInternet.Data
 
         private static void PreencherDadosReaisTarefas(GestorProjetosContext gestorContext)
         {
+            Projeto projeto = new Projeto();
+            projeto.Nome = "TesteTarefa";
+            projeto.DataFinalPrevista = new DateTime(2022, 01, 12);
+            projeto.DataInicialPrevista = new DateTime(2022, 01, 12);
+            projeto.DataFinal = null;
+            projeto.DataInicio = null;
+            projeto.colaborador = gestorContext.Colaborador.Find(1);
+
             gestorContext.Tarefa.Add(new Tarefa
             {
                 Nome = "Nova janela",
                 Descricao = "Criar uma janela que permita a visualização dos detalhes",
                 DataPrevistaInicio = new DateTime(2022,01,05),
                 DataPrevistaFim = new DateTime(2022, 01, 10),
-                DataInicio = null,
-                DataFim = null,
-                Projeto = gestorContext.Projeto.Find(1)
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
             });
 
             gestorContext.Tarefa.Add(new Tarefa
@@ -92,9 +101,9 @@ namespace TrabalhoFinalProgInternet.Data
                 Descricao = "Fazer a paginação nas views: 'create', 'details', 'edit', 'delete' e 'index'",
                 DataPrevistaInicio = new DateTime(2022, 01, 15),
                 DataPrevistaFim = new DateTime(2022, 01, 18),
-                DataInicio = null,
-                DataFim = null,
-                Projeto = gestorContext.Projeto.Find(1)
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
             });
 
             gestorContext.Tarefa.Add(new Tarefa
@@ -103,9 +112,9 @@ namespace TrabalhoFinalProgInternet.Data
                 Descricao = "Criar uma função que permita a pesquisa por nome de um projeto",
                 DataPrevistaInicio = new DateTime(2022, 01, 11),
                 DataPrevistaFim = new DateTime(2022, 01, 12),
-                DataInicio = null,
-                DataFim = null,
-                Projeto = gestorContext.Projeto.Find(1)
+                DataInicio = new DateTime(2022, 01, 18),
+                DataFim = new DateTime(2022, 01, 18),
+                Projeto = projeto
             });
 
             gestorContext.SaveChanges();
