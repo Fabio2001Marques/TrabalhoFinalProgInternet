@@ -1,25 +1,26 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TrabalhoFinalProgInternet.Models;
 
-namespace TrabalhoFinalProgInternet.Models
+namespace TrabalhoFinalProgInternet.ViewModels
 {
-    public class Tarefa
+    public class TarefaViewModel
     {
-        public int TarefaId { get; set; } 
+        public int TarefaId { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
-        [StringLength(256, ErrorMessage = "Insira um nome com até 256 carateres")]
+        [StringLength(256, ErrorMessage = "Insira um nome com atÃ© 256 carateres")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Preencha o campo Descrição")]
-        [DisplayName("Descrição")]
+        [Required(ErrorMessage = "Preencha o campo DescriÃ§Ã£o")]
+        [DisplayName("DescriÃ§Ã£o")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "Selecione a Data Prevista de Início")]
+        [Required(ErrorMessage = "Selecione a Data Prevista de InÃ­cio")]
         [DataType(DataType.Date)]
         [DisplayName("Data Prevista de Inicio")]
         public DateTime DataPrevistaInicio { get; set; }
@@ -35,10 +36,9 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Data Fim")]
         public DateTime DataFim { get; set; }
 
-        [DisplayName ("Projeto")]
+        [DisplayName("Projeto")]
         public int ProjetoId { get; set; }
 
         public Projeto Projeto { get; set; }
-
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
+using TrabalhoFinalProgInternet.ViewModels;
 
 namespace TrabalhoFinalProgInternet.Controllers
 {
@@ -20,10 +21,42 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nome, int page = 1)
         {
-            var gestorProjetosContext = _context.Tarefa.Include(t => t.Projeto);
-            return View(await gestorProjetosContext.ToListAsync());
+            var procuraTarefa = _context.Tarefa
+                .Where(b => nome == null || b.Nome.Contains(nome));
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = procuraTarefa.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var tarefas = await procuraTarefa
+                            .Include(b => b.Projeto)
+                            .OrderBy(b => b.Nome)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new TarefaListViewModel
+                {
+                    Tarefas = tarefas,
+                    PagingInfo = pagingInfo,
+                    ProcuraNome = nome
+                }
+            );
         }
 
         // GET: Tarefas/Details/5
