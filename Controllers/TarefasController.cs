@@ -90,13 +90,23 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,DataInicio,DataFim,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ProjetoId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tarefa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                tarefa.DataInicio = null;
+                tarefa.DataFim = null;
+                if (tarefa.DataPrevistaFim >= tarefa.DataPrevistaInicio)
+                {
+                    _context.Add(tarefa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }else
+                {
+                    ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
+                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+                    return View(tarefa);
+                }
             }
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
             return View(tarefa);
@@ -133,21 +143,30 @@ namespace TrabalhoFinalProgInternet.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                if (tarefa.DataPrevistaFim >= tarefa.DataPrevistaInicio)
                 {
-                    _context.Update(tarefa);
-                    await _context.SaveChangesAsync();
+                    try
+                    {
+                        _context.Update(tarefa);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!TarefaExists(tarefa.TarefaId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!TarefaExists(tarefa.TarefaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
+                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+                    return View(tarefa);
                 }
                 return RedirectToAction(nameof(Index));
             }
