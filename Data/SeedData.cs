@@ -73,6 +73,23 @@ namespace TrabalhoFinalProgInternet.Data
             gestorContext.SaveChanges();
         }
 
+        private static void PreencherDadosReaisTarefas(GestorProjetosContext gestorContext)
+        {
+            gestorContext.Tarefa.Add(new Tarefa
+            {
+                Nome = "Nova janela",
+                Descricao = "Criar uma janela que permita a visualização dos detalhes",
+                DataPrevistaInicio = new DateTime(2022,01,05),
+                DataPrevistaFim = new DateTime(2022, 01, 10),
+                DataInicio = null,
+                DataFim = null,
+                Projeto = gestorContext.Projeto.Find(1)
+            });
+
+
+            gestorContext.SaveChanges();
+        }
+
 
 
     }    

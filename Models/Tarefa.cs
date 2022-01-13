@@ -29,11 +29,11 @@ namespace TrabalhoFinalProgInternet.Models
         [DisplayName("Data Prevista de Fim")]
         public DateTime DataPrevistaFim { get; set; }
 
-        [DisplayName("Data Inicio")]
-        public DateTime DataInicio { get; set; }
+        [DisplayName("Data efetiva de Inicio")]
+        public DateTime? DataInicio { get; set; }
 
-        [DisplayName("Data Fim")]
-        public DateTime DataFim { get; set; }
+        [DisplayName("Data efetiva de Fim")]
+        public DateTime? DataFim { get; set; }
 
         [DisplayName ("Projeto")]
         public int ProjetoId { get; set; }
