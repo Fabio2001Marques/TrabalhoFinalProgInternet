@@ -204,5 +204,73 @@ namespace TrabalhoFinalProgInternet
         {
             return _context.Projeto.Any(e => e.ProjetoId == id);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Iniciar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var projeto = await _context.Projeto.FirstOrDefaultAsync(m => m.ProjetoId == id);
+
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+            projeto.DataInicio = new DateTime(1111, 12, 12);
+            try
+            {
+                _context.Update(projeto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjetoExists(projeto.ProjetoId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View(Index(""));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalizar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var projeto = await _context.Projeto.FirstOrDefaultAsync(m => m.ProjetoId == id);
+
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+            projeto.DataFinal = new DateTime(1111, 12, 12);
+            try
+            {
+                _context.Update(projeto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjetoExists(projeto.ProjetoId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View(Index(""));
+        }
     }
 }

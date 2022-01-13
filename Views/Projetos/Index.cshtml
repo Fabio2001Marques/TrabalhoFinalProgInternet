@@ -60,10 +60,14 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.colaborador.Nome)
                     </td>
-
-
-
                     <td>
+                        @if (item.DataInicio == null)
+                        {
+                            <a asp-action="Iniciar" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Iniciar</a>}
+                        else
+                        {
+                            <a asp-action="Finalizar" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Finalizar</a>
+                        } |
                         <a asp-controller="ColaboradorProjetos" asp-action="Index" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Adicionar colaboradores</a>
                         <a asp-action="Details" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Detalhes</a>
 
