@@ -9,7 +9,7 @@ namespace TrabalhoFinalProgInternet.Models
 {
     public class Tarefa
     {
-        public int TarefaId { get; set; }
+        public int TarefaId { get; set; } 
 
         [Required(ErrorMessage = "Preencha o campo Nome")]
         [StringLength(256, ErrorMessage = "Insira um nome com até 256 carateres")]
