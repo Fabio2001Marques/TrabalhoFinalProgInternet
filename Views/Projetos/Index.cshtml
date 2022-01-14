@@ -48,7 +48,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
+                        <a asp-controller="Tarefas" asp-action="Index" asp-route-id="@item.ProjetoId"> @Html.DisplayFor(modelItem => item.Nome)</a>
                     </td>
 
                     <td>

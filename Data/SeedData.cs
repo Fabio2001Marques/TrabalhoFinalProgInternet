@@ -1,4 +1,4 @@
-﻿//#define TEST_PAGINATION_BOOKS
+﻿#define TEST_PAGINATION_GESTOR
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace TrabalhoFinalProgInternet.Data
     {
         internal static void Populate(GestorProjetosContext gestorContext)
         {
-#if TEST_PAGINATION_BOOKS
+#if TEST_PAGINATION_GESTOR
             //PreencherDadosFicticiosCargo(gestorContext);
             //PreencherDadosFicticiosColaboradores(gestorContext);
             //PreencherDadosFicticiosTarefas(gestorContext);
