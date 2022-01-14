@@ -22,6 +22,9 @@ namespace TrabalhoFinalProgInternet
         // GET: ColaboradorProjetos
         public async Task<IActionResult> Index(int? id)
         {
+            ViewBag.id = id;
+            string nome = _context.Projeto.Where(c => c.ProjetoId == id).Include(c => c.Nome).ToString();
+            ViewBag.nome = nome;
             var gestorProjetosContext = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Colaborador).Include(c => c.Projeto);
             //var nome = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Projeto.Nome); 
             
@@ -50,10 +53,14 @@ namespace TrabalhoFinalProgInternet
         }
 
         // GET: ColaboradorProjetos/Create
-        public IActionResult Create()
+        public  IActionResult Create()
         {
+
+            
+
+
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto/*.Where(c => c.ProjetoId == id)*/, "ProjetoId", "Nome");
             return View();
         }
 
