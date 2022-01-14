@@ -87,13 +87,12 @@ namespace TrabalhoFinalProgInternet.Controllers
             }
 
             var tarefa = await _context.Tarefa
-                .Include(t => t.Projeto)
                 .FirstOrDefaultAsync(m => m.TarefaId == id);
             if (tarefa == null)
             {
                 return NotFound();
             }
-            tarefa.DataInicio = new DateTime(1111, 12, 12);
+            tarefa.DataInicio = DateTime.Now;
             try
             {
                 _context.Update(tarefa);
@@ -110,7 +109,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-         return View(Index(""));
+         return View("Index");
         }
 
         [HttpPost]
@@ -146,7 +145,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-            return View(Index(""));
+            return View("Index");
         }
 
         // GET: Tarefas/Create
