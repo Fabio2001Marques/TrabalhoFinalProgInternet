@@ -21,7 +21,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index(string nome, int page = 1)
+        public async Task<IActionResult> Index(string nome ="", int page = 1)
         {
             var procuraTarefa = _context.Tarefa
                 .Where(b => nome == null || b.Nome.Contains(nome));
@@ -122,13 +122,12 @@ namespace TrabalhoFinalProgInternet.Controllers
             }
 
             var tarefa = await _context.Tarefa
-                .Include(t => t.Projeto)
                 .FirstOrDefaultAsync(m => m.TarefaId == id);
             if (tarefa == null)
             {
                 return NotFound();
             }
-            tarefa.DataFim = new DateTime(1111, 12, 12);
+            tarefa.DataFim = DateTime.Now;
             try
             {
                 _context.Update(tarefa);

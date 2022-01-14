@@ -65,7 +65,11 @@
                 }
                 else
                 {
-                    <a asp-action="Finalizar" asp-route-id="@item.TarefaId" class="btn btn-secondary">Finalizar</a>
+                    <form asp-action="Finalizar" asp-route-id="@item.TarefaId">
+                        <div class="form-group">
+                            <input type="submit" value="Finalizar" class="btn btn-primary" />
+                        </div>
+                    </form>
                 } |
                     <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a> |
                     <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
