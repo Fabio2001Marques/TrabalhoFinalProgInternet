@@ -22,13 +22,14 @@ namespace TrabalhoFinalProgInternet
         // GET: ColaboradorProjetos
         public async Task<IActionResult> Index(int? id)
         {
-            ViewBag.id = id;
-            string nome = _context.Projeto.Where(c => c.ProjetoId == id).Include(c => c.Nome).ToString();
-            ViewBag.nome = nome;
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.Projeto = projeto;
             var gestorProjetosContext = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Colaborador).Include(c => c.Projeto);
-            //var nome = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Projeto.Nome); 
-            
-            //ViewBag.ProjetoNome = nome.FirstOrDefault();
+
             return View(await gestorProjetosContext.ToListAsync());
         }
 
@@ -53,14 +54,19 @@ namespace TrabalhoFinalProgInternet
         }
 
         // GET: ColaboradorProjetos/Create
-        public  IActionResult Create()
+        public  IActionResult Create(int? id)
         {
-
-            
-
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            var nome = projeto.Nome;
+            ViewBag.Nome = nome;
 
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto/*.Where(c => c.ProjetoId == id)*/, "ProjetoId", "Nome");
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
+            //ViewData["ProjetoId"] = new SelectList(_context.Projeto.Where(c => c.ProjetoId == id), "ProjetoId", "Nome");
             return View();
         }
 
