@@ -1,5 +1,4 @@
-﻿//#define TEST_PAGINATION_BOOKS
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,16 +10,32 @@ namespace TrabalhoFinalProgInternet.Data
     {
         internal static void Populate(GestorProjetosContext gestorContext)
         {
-#if TEST_PAGINATION_BOOKS
+            var colaboradoresProjeto = gestorContext.ColaboradorProjeto.FirstOrDefault();
+
+            if (gestorContext.Cargo.FirstOrDefault() == null)
+            {
+                PreencherDadosReaisCargo(gestorContext);
+            }
+            if (gestorContext.Colaborador.FirstOrDefault() == null)
+            {
+                PreencherDadosReaisColaborador(gestorContext);
+            }
+            if (gestorContext.Projeto.FirstOrDefault() == null)
+            {
+                PreencherDadosReaisProjetos(gestorContext);
+            }
+            if (gestorContext.Tarefa.FirstOrDefault() == null)
+            {
+                PreencherDadosReaisTarefas(gestorContext);
+            }
+
             //PreencherDadosFicticiosCargo(gestorContext);
             //PreencherDadosFicticiosColaboradores(gestorContext);
             //PreencherDadosFicticiosTarefas(gestorContext);
-            PreencherDadosReaisCargo(gestorContext);
-            PreencherDadosReaisColaborador(gestorContext);
-            PreencherDadosReaisTarefas(gestorContext);
-            PreencherDadosReaisProjetos(gestorContext);
+
+
             
-#endif
+            
         }
         private static void PreencherDadosFicticiosCargo(GestorProjetosContext gestorContext)
         {
