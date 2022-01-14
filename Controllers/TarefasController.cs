@@ -236,7 +236,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -271,7 +271,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         private bool TarefaExists(int id)
