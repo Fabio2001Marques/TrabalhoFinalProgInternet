@@ -21,8 +21,12 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index(string nome, int page = 1)
+        public async Task<IActionResult> Index(int? id ,string nome, int page = 1)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
             var procuraTarefa = _context.Tarefa
                 .Where(b => nome == null || b.Nome.Contains(nome));
 
@@ -43,6 +47,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             }
 
             var tarefas = await procuraTarefa
+                            .Where(b => b.ProjetoId == id)
                             .Include(b => b.Projeto)
                             .OrderBy(b => b.Nome)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)

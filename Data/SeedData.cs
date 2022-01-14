@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,8 @@ namespace TrabalhoFinalProgInternet.Data
     {
         internal static void Populate(GestorProjetosContext gestorContext)
         {
+
+
             var colaboradoresProjeto = gestorContext.ColaboradorProjeto.FirstOrDefault();
 
             if (gestorContext.Cargo.FirstOrDefault() == null)
@@ -29,9 +31,6 @@ namespace TrabalhoFinalProgInternet.Data
                 PreencherDadosReaisTarefas(gestorContext);
             }
 
-            //PreencherDadosFicticiosCargo(gestorContext);
-            //PreencherDadosFicticiosColaboradores(gestorContext);
-            //PreencherDadosFicticiosTarefas(gestorContext);
 
 
             
