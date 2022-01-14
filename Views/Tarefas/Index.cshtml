@@ -55,8 +55,23 @@
                 @Html.DisplayFor(modelItem => item.Projeto.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TarefaId" class="btn btn-secondary">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a>
+                @if (item.DataInicio == null)
+                {
+                    <form asp-action="Iniciar" asp-route-id="@item.TarefaId">
+                        <div class="form-group">
+                            <input type="submit" value="Iniciar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <form asp-action="Finalizar" asp-route-id="@item.TarefaId">
+                        <div class="form-group">
+                            <input type="submit" value="Finalizar" class="btn btn-primary" />
+                        </div>
+                    </form>
+                } |
+                <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a> |
                 <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
             </td>
         </tr>
