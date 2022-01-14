@@ -218,6 +218,75 @@ namespace TrabalhoFinalProgInternet
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Iniciar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var projeto = await _context.Projeto
+                .FirstOrDefaultAsync(m => m.ProjetoId == id);
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+            projeto.DataInicio = DateTime.Now;
+            try
+            {
+                _context.Update(projeto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjetoExists(projeto.ProjetoId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalizar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var projeto = await _context.Projeto
+                .FirstOrDefaultAsync(m => m.ProjetoId == id);
+            if (projeto == null)
+            {
+                return NotFound();
+            }
+            projeto.DataFinal = DateTime.Now;
+            try
+            {
+                _context.Update(projeto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProjetoExists(projeto.ProjetoId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Index");
+        }
         private bool ProjetoExists(int id)
         {
             return _context.Projeto.Any(e => e.ProjetoId == id);
