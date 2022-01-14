@@ -204,6 +204,76 @@ namespace TrabalhoFinalProgInternet.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Iniciar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tarefa = await _context.Tarefa
+                .FirstOrDefaultAsync(m => m.TarefaId == id);
+            if (tarefa == null)
+            {
+                return NotFound();
+            }
+            tarefa.DataInicio = DateTime.Now;
+            try
+            {
+                _context.Update(tarefa);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TarefaExists(tarefa.TarefaId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalizar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tarefa = await _context.Tarefa
+                .FirstOrDefaultAsync(m => m.TarefaId == id);
+            if (tarefa == null)
+            {
+                return NotFound();
+            }
+            tarefa.DataFim = DateTime.Now;
+            try
+            {
+                _context.Update(tarefa);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TarefaExists(tarefa.TarefaId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return View("Index");
+        }
+
         private bool TarefaExists(int id)
         {
             return _context.Tarefa.Any(e => e.TarefaId == id);
