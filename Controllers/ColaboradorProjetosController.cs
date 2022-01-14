@@ -153,9 +153,9 @@ namespace TrabalhoFinalProgInternet
         // POST: ColaboradorProjetos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int ColaboradorId, int ProjetoId)
         {
-            var colaboradorProjeto = await _context.ColaboradorProjeto.FindAsync(id);
+            var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
             _context.ColaboradorProjeto.Remove(colaboradorProjeto);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
