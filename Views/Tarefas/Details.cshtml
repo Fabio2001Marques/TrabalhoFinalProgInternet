@@ -88,7 +88,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.TarefaId" class="btn btn-primary">Editar</a>
+    @if (Model.DataFim == null) { 
+        <a asp-action="Edit" asp-route-id="@Model.TarefaId" class="btn btn-primary">Editar</a>
+    }
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </div>
 </div>

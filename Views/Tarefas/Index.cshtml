@@ -55,24 +55,34 @@
                 @Html.DisplayFor(modelItem => item.Projeto.Nome)
             </td>
             <td>
-                @if (item.DataInicio == null)
-                {
-                    <form asp-action="Iniciar" asp-route-id="@item.TarefaId">
-                        <div class="form-group">
-                            <input type="submit" value="Iniciar" class="btn btn-primary" /> |
-                        </div>
-                    </form>
-                }
-                else if(item.DataFim == null)
-                {
-                    <form asp-action="Finalizar" asp-route-id="@item.TarefaId">
-                        <div class="form-group">
-                            <input type="submit" value="Finalizar" class="btn btn-primary" /> |
-                        </div>
-                    </form>
-                } 
-                <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
+                <table>
+                    <tr>
+                        <td>
+                            @if (item.DataInicio == null)
+                            {
+                               <form asp-action="Iniciar" asp-route-id="@item.TarefaId">
+                                    <div class="form-group">
+                                        <input type="submit" value="Iniciar" class="btn btn-primary" /> 
+                                    </div>
+                                </form>
+                            }
+                            else if(item.DataFim == null)
+                            {
+                                <form asp-action="Finalizar" asp-route-id="@item.TarefaId">
+                                    <div class="form-group">
+                                    <input type="submit" value="Finalizar" class="btn btn-primary" /> 
+                                    </div>
+                                </form>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.TarefaId" class="btn btn-secondary">Detalhes</a> 
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.TarefaId" class="btn btn-secondary">Eliminar</a>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         }
