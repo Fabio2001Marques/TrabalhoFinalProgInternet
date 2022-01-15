@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <h1>Eliminiar Colaborador</h1>
 
-    <h3>Tem a certeza que pretende eliminar este colaborador do projeto?</h3>
+    <h3>Tem a certeza que pretende eliminar o colaborador @ViewBag.Colaborador.Colaborador.Nome do projeto @ViewBag.Colaborador.Projeto.Nome?</h3>
     <div>
         <hr />
         <dl class="row">
@@ -41,7 +41,7 @@
             <input type="hidden" asp-for="ColaboradorId" />
             <input type="hidden" asp-for="ProjetoId" />
             <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            <a asp-action="Index" asp-route-id="@ViewBag.Colaborador.ProjetoId" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>
