@@ -61,8 +61,7 @@ namespace TrabalhoFinalProgInternet
                 return NotFound();
             }
             var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
-            var nome = projeto.Nome;
-            ViewBag.Nome = nome;
+            ViewBag.Projeto = projeto;
 
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
@@ -150,6 +149,10 @@ namespace TrabalhoFinalProgInternet
             {
                 return NotFound();
             }
+
+            var colaborador = _context.ColaboradorProjeto.Where(c => c.ColaboradorId == id).FirstOrDefault();
+            ViewBag.Colaborador = colaborador;
+
 
             var colaboradorProjeto = await _context.ColaboradorProjeto
                 .Include(c => c.Colaborador)
