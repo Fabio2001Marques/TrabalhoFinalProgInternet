@@ -40,5 +40,12 @@ namespace TrabalhoFinalProgInternet.Models
 
         public Projeto Projeto { get; set; }
 
+        [Required(ErrorMessage = "Selecione um Colaborador")]
+        [DisplayName("Colaborador")]
+        public int ColaboradorId { get; set; }
+
+        public Colaborador Colaborador { get; set; }
+
+
     }
 }
