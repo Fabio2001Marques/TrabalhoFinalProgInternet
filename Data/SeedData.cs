@@ -134,7 +134,8 @@ namespace TrabalhoFinalProgInternet.Data
                 DataPrevistaFim = new DateTime(2022, 01, 10),
                 DataInicio = new DateTime(2022, 01, 18),
                 DataFim = new DateTime(2022, 01, 18),
-                Projeto = projeto
+                Projeto = projeto,
+                Colaborador = gestorContext.Colaborador.Find(1)
             });
 
             gestorContext.Tarefa.Add(new Tarefa
@@ -145,7 +146,8 @@ namespace TrabalhoFinalProgInternet.Data
                 DataPrevistaFim = new DateTime(2022, 01, 18),
                 DataInicio = new DateTime(2022, 01, 18),
                 DataFim = new DateTime(2022, 01, 18),
-                Projeto = projeto
+                Projeto = projeto,
+                Colaborador = gestorContext.Colaborador.Find(1)
             });
 
             gestorContext.Tarefa.Add(new Tarefa
@@ -155,8 +157,9 @@ namespace TrabalhoFinalProgInternet.Data
                 DataPrevistaInicio = new DateTime(2022, 01, 11),
                 DataPrevistaFim = new DateTime(2022, 01, 12),
                 DataInicio = new DateTime(2022, 01, 18),
-                DataFim = new DateTime(2022, 01, 18),
-                Projeto = projeto
+                DataFim = new DateTime(2022, 01, 18), 
+                Projeto = projeto,
+                Colaborador = gestorContext.Colaborador.Find(1)
             });
 
             gestorContext.SaveChanges();

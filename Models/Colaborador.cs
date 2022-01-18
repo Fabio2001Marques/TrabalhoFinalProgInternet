@@ -34,6 +34,7 @@ namespace TrabalhoFinalProgInternet.Models
         public Cargo Cargo { get; set; }
 
         public ICollection<ColaboradorProjeto> ColaboradorProjetos { get; set; }
+        public ICollection<Colaborador> ColaboradorTarefas { get; set; }
 
     }
 }

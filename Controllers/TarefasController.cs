@@ -27,6 +27,9 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.ProjetoId = id;
+
             var procuraTarefa = _context.Tarefa
                 .Where(b => nome == null || b.Nome.Contains(nome));
 
@@ -84,9 +87,10 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome");
+            ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
+
             return View();
         }
 
@@ -95,7 +99,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ProjetoId,ColaboradorProjetoId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -114,6 +118,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 }
             }
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+            
             return View(tarefa);
         }
 
