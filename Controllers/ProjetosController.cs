@@ -212,6 +212,14 @@ namespace TrabalhoFinalProgInternet
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var colaboradores = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).FirstOrDefault();           
+            if (colaboradores != null)
+            {
+                ViewBag.Controller = "Projetos";
+                ViewBag.Title = "Erro ao eliminar Projeto";
+                ViewBag.Message = "Não pode eliminar um Projeto que já tenha tido atividade ";
+                return View("Erro");
+            }
             var projeto = await _context.Projeto.FindAsync(id);
             _context.Projeto.Remove(projeto);
             await _context.SaveChangesAsync();
