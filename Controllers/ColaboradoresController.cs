@@ -102,7 +102,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 colaborador.Email = colaboradorViewModel.Email;
                 colaborador.CargoId = colaboradorViewModel.CargoId;
 
-                if((colaboradorViewModel.NovoCargo != null)||(colaboradorViewModel.NovoCargo != "---Seleciona---"))
+                if(colaboradorViewModel.NovoCargo != null)
                 {
                     Cargo cargo = new Cargo();
                     cargo.Nome = colaboradorViewModel.NovoCargo;
@@ -160,6 +160,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             Colaborador colaborador = new Colaborador();
             if (ModelState.IsValid)
             {
+                colaborador.ColaboradorId = colaboradorViewModel.ColaboradorId;
                 colaborador.Nome = colaboradorViewModel.Nome;
                 colaborador.NumeroCC = colaboradorViewModel.NumeroCC;
                 colaborador.Contacto = colaboradorViewModel.Contacto;
