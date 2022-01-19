@@ -36,7 +36,6 @@
             <div class="form-group">
                 <label asp-for="CargoId" class="control-label"></label>
                 <select id=cargoId asp-for="CargoId" class="form-control" asp-items="ViewBag.CargoId" onchange="change(this)">
-                    <option value="1">---Seleciona---</option>
                     <option value="2">Outro</option>
                 </select>
                 <input class="form-control" style="display: none" asp-for="NovoCargo" />
@@ -53,12 +52,12 @@
 <script>
     function change(obj) {
         var selectBox = obj;
-        var selected = selectBox.options[selectBox.selectedIndex].value;
+        var selected = selectBox.options[selectBox.selectedIndex].text;
         var input = document.getElementById("NovoCargo");
 
-        if (selected === '2') {
-            selectBox.style.display = "none";
+        if (selected === 'Outro') {
             input.style.display = "block";
+            input.focus();
         }
         else {
             input.style.display = "none";
