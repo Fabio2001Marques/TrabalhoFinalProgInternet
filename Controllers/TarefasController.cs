@@ -55,6 +55,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             var tarefas = await procuraTarefa
                             .Where(b => b.ProjetoId == id)
                             .Include(b => b.Projeto)
+                            .Include(b => b.Colaborador)
                             .OrderBy(b => b.Nome)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
