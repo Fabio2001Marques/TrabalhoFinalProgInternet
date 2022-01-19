@@ -91,7 +91,9 @@ namespace TrabalhoFinalProgInternet.Controllers
         public IActionResult Create(int? id)
         {
             ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
+
             ViewBag.ProId = id;
+
             return View();
         }
 
