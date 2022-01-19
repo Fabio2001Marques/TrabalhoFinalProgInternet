@@ -85,7 +85,7 @@ namespace TrabalhoFinalProgInternet
                 ViewBag.Controller = "ColaboradorProjetos";
                 ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
                 ViewBag.Title = "Adicionado Colaborador";
-                ViewBag.Message = "Colaborador Adicioado com Sucesso";
+                ViewBag.Message = "Colaborador Adicionado com Sucesso";
                 return View("Sucesso");
             }
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
@@ -180,7 +180,11 @@ namespace TrabalhoFinalProgInternet
             var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
             _context.ColaboradorProjeto.Remove(colaboradorProjeto);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewBag.Controller = "ColaboradorProjetos";
+            ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
+            ViewBag.Title = "Eliminado Colaborador";
+            ViewBag.Message = "Colaborador Eliminado com Sucesso";
+            return View("Sucesso");
         }
 
         private bool ColaboradorProjetoExists(int id)
