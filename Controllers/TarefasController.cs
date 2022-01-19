@@ -96,7 +96,7 @@ namespace TrabalhoFinalProgInternet.Controllers
 
             var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
             ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
-            ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
+            //ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
             var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
             ViewBag.ProjetoNome = projeto.Nome;
             ViewBag.ProId = id;
@@ -110,7 +110,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id,[Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ColaboradorProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create(int id,[Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ColaboradorId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
@@ -121,8 +121,13 @@ namespace TrabalhoFinalProgInternet.Controllers
                 {
                     _context.Add(tarefa);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }else
+                    ViewBag.Controller = "Tarefas";
+                    ViewBag.ProjetoId = tarefa.ProjetoId;
+                    ViewBag.Title = "Adicionada Tarefa";
+                    ViewBag.Message = "Tarefa adicionada com sucesso ao projeto ";
+                    return View("Sucesso");
+                }
+                else
                 {
                     ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
                     ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
