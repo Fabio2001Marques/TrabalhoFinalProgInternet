@@ -21,7 +21,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index(int? id ,string nome, int page = 1)
+        public async Task<IActionResult> Index(int? id ,string nome="", int page = 1)
         {
             if (id == null)
             {
@@ -75,6 +75,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 return NotFound();
             }
 
+
             var tarefa = await _context.Tarefa
                 .Include(t => t.Projeto)
                 .FirstOrDefaultAsync(m => m.TarefaId == id);
@@ -90,7 +91,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         public IActionResult Create(int? id)
         {
             ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
-
+            ViewBag.ProId = id;
             return View();
         }
 
@@ -129,6 +130,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa.FindAsync(id);
             if (tarefa == null)
@@ -191,6 +193,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa
                 .Include(t => t.Projeto)
