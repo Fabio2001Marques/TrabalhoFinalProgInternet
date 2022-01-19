@@ -58,7 +58,7 @@
         <form asp-action="Delete">
             <input type="hidden" asp-for="TarefaId" />
             <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            <a asp-action="Index" asp-route-id="@ViewBag.ProjetoId" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </div>
