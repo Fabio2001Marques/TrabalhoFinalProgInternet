@@ -177,6 +177,15 @@ namespace TrabalhoFinalProgInternet
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int ColaboradorId, int ProjetoId)
         {
+            var tarefas = _context.Tarefa.Where(c => c.ColaboradorId == ColaboradorId).FirstOrDefault();
+            
+            if (tarefas.DataFim != null)
+            {
+                ViewBag.Controller = "ColaboradorProjetos";
+                ViewBag.Title = "Erro ao eliminar Colaborador";
+                ViewBag.Message = "Não pode eliminar um Colaborador que tenha uma tarefa ainda pendente";
+                return View("Erro");
+            }
             var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
             _context.ColaboradorProjeto.Remove(colaboradorProjeto);
             await _context.SaveChangesAsync();

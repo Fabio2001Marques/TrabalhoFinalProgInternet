@@ -221,6 +221,13 @@ namespace TrabalhoFinalProgInternet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var projetos = _context.ColaboradorProjeto.Where(c => c.ColaboradorId == id).FirstOrDefault();
+            if (projetos != null) {
+                ViewBag.Controller = "Colaboradores";
+                ViewBag.Title = "Erro ao eliminar Colaborador";
+                ViewBag.Message = "Não pode eliminar um Colaborador que esteja atribuído a um projeto";
+                return View("Erro");
+            }
             var colaborador = await _context.Colaborador.FindAsync(id);
             _context.Colaborador.Remove(colaborador);
             await _context.SaveChangesAsync();
