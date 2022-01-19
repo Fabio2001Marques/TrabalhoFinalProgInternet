@@ -28,6 +28,9 @@ namespace TrabalhoFinalProgInternet.Controllers
                 return NotFound();
             }
 
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.ProjetoNome = projeto.Nome;
+
             ViewBag.ProjetoId = id;
 
             var procuraTarefa = _context.Tarefa
@@ -93,12 +96,9 @@ namespace TrabalhoFinalProgInternet.Controllers
 
             var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
             ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
-            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
-            ViewBag.Projeto = projeto;
-            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
-
             ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
-
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.ProjetoNome = projeto.Nome;
             ViewBag.ProId = id;
 
 
@@ -110,10 +110,11 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ProjetoId,ColaboradorProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Create(int id,[Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,ColaboradorProjetoId")] Tarefa tarefa)
         {
             if (ModelState.IsValid)
             {
+                tarefa.ProjetoId = id;
                 tarefa.DataInicio = null;
                 tarefa.DataFim = null;
                 if (tarefa.DataPrevistaFim >= tarefa.DataPrevistaInicio)
