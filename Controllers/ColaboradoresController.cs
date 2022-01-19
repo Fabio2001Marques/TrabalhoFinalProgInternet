@@ -115,7 +115,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 await _context.SaveChangesAsync();
                 ViewBag.Controller = "Colaboradores";
                 ViewBag.Title = "Adicionado Colaborador";
-                ViewBag.Message = "Colaborador Adicioado com Sucesso";
+                ViewBag.Message = "Colaborador Adicionado com Sucesso";
                 return View("Sucesso");
             }
             ViewData["CargoId"] = new SelectList(_context.Cargo, "CargoId", "Nome", colaborador.CargoId);
