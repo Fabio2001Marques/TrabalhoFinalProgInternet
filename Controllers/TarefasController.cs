@@ -90,9 +90,17 @@ namespace TrabalhoFinalProgInternet.Controllers
         // GET: Tarefas/Create
         public IActionResult Create(int? id)
         {
+
+            var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
+            ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.Projeto = projeto;
+            ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
+
             ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
 
             ViewBag.ProId = id;
+
 
             return View();
         }
