@@ -21,7 +21,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index(int? id ,string nome, int page = 1)
+        public async Task<IActionResult> Index(int? id ,string nome="", int page = 1)
         {
             if (id == null)
             {
@@ -75,6 +75,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                 return NotFound();
             }
 
+
             var tarefa = await _context.Tarefa
                 .Include(t => t.Projeto)
                 .FirstOrDefaultAsync(m => m.TarefaId == id);
@@ -89,12 +90,18 @@ namespace TrabalhoFinalProgInternet.Controllers
         // GET: Tarefas/Create
         public IActionResult Create(int? id)
         {
+
             var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
-            //var x = colaboradores.ToList();
             ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
             var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
             ViewBag.Projeto = projeto;
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
+
+            ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
+
+            ViewBag.ProId = id;
+
+
             return View();
         }
 
@@ -133,6 +140,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa.FindAsync(id);
             if (tarefa == null)
@@ -195,6 +203,7 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
+            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa
                 .Include(t => t.Projeto)

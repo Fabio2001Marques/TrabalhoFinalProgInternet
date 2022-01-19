@@ -74,13 +74,19 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColaboradorId,ProjetoId,DataDeInicio,DataDeSaida")] ColaboradorProjeto colaboradorProjeto)
+        public async Task<IActionResult> Create(int id,[Bind("ColaboradorId,DataDeInicio,DataDeSaida")] ColaboradorProjeto colaboradorProjeto)
         {
+            
             if (ModelState.IsValid)
             {
+                colaboradorProjeto.ProjetoId = id;
                 _context.Add(colaboradorProjeto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Controller = "ColaboradorProjetos";
+                ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
+                ViewBag.Title = "Adicionado Colaborador";
+                ViewBag.Message = "Colaborador Adicionado com Sucesso";
+                return View("Sucesso");
             }
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", colaboradorProjeto.ProjetoId);
@@ -174,7 +180,11 @@ namespace TrabalhoFinalProgInternet
             var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
             _context.ColaboradorProjeto.Remove(colaboradorProjeto);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewBag.Controller = "ColaboradorProjetos";
+            ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
+            ViewBag.Title = "Eliminado Colaborador";
+            ViewBag.Message = "Colaborador Eliminado com Sucesso";
+            return View("Sucesso");
         }
 
         private bool ColaboradorProjetoExists(int id)

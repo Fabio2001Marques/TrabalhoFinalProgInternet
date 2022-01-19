@@ -48,7 +48,7 @@
             {
                 <tr>
                     <td>
-                        <a asp-controller="Tarefas" asp-action="Index" asp-route-id="@item.ProjetoId"> @Html.DisplayFor(modelItem => item.Nome)</a>
+                        @Html.DisplayFor(modelItem => item.Nome)
                     </td>
 
                     <td>
@@ -72,7 +72,7 @@
                                             </div>
                                         </form>
                                     }
-                                    else if(item.DataFinal == null)
+                                    else if (item.DataFinal == null)
                                     {
                                         <form asp-action="Finalizar" asp-route-id="@item.ProjetoId">
                                             <div class="form-group">
@@ -83,6 +83,9 @@
                                 </td>
                                 <td>
                                     <a asp-controller="ColaboradorProjetos" asp-action="Index" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Ver colaboradores</a>
+                                </td>
+                                <td>
+                                    <a asp-controller="Tarefas" asp-action="Index" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Ver Tarefas</a>
                                 </td>
                                 <td>
                                     <a asp-action="Details" asp-route-id="@item.ProjetoId" class="btn btn-secondary">Detalhes</a>
