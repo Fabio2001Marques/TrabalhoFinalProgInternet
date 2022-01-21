@@ -47,18 +47,18 @@ namespace TrabalhoFinalProgInternet.Controllers
             return View(colaboradorConta);
         }
 
-        // GET: ColaboradorContas/Create
-        public IActionResult Create()
+        // GET: ColaboradorContas/Register
+        public IActionResult Register()
         {
             return View();
         }
 
-        // POST: ColaboradorContas/Create
+        // POST: ColaboradorContas/Register
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ColaboradorContaId,Name,Email,Phone")] ColaboradorConta colaboradorConta)
+        public async Task<IActionResult> Register([Bind("ColaboradorContaId,Name,Email,Phone")] ColaboradorConta colaboradorConta)
         {
             if (ModelState.IsValid)
             {
