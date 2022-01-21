@@ -77,10 +77,16 @@ namespace TrabalhoFinalProgInternet.Controllers
                 if (restult.Succeeded)
                 {
                     await _signInManager.SignInAsync(user,isPersistent: false);
-                    _context.Add(colaboradorConta);
+                    _context.Add( new ColaboradorConta { 
+                    Email = colaboradorConta.Email,
+                    Name = colaboradorConta.Name,
+                    Phone = colaboradorConta.Phone
+
+                    });
+
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Projeto");
+                    return RedirectToAction("Index", "Projetos");
                 }
 
                 foreach(var error in restult.Errors)
