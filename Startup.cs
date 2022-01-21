@@ -32,14 +32,42 @@ namespace TrabalhoFinalProgInternet
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                // Sign in
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                // Password
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 6;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+
+
+                //User
+                options.User.RequireUniqueEmail = true;
+
+                // Lockout
+                options.Lockout.AllowedForNewUsers = true;
+                //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                //options.Lockout.MaxFailedAccessAttempts = 5;
+
+
+
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI();
             services.AddControllersWithViews();
 
-            services.AddDbContext<GestorProjetosContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("GestorProjetosContext")));
-        }
+                services.AddDbContext<GestorProjetosContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("GestorProjetosContext")));
+           
 
+          }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GestorProjetosContext gestorContext)
         {
