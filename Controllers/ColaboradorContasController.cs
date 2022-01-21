@@ -72,10 +72,18 @@ namespace TrabalhoFinalProgInternet.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(_userManager.FindByEmailAsync(colaboradorConta.Email) != null)
+                {
+                    ModelState.AddModelError("Email", "Ja existe um utilizador com esse nome");
+                    return View(colaboradorConta);
+                }
+
+
                 var user = new IdentityUser { UserName = colaboradorConta.Email, Email = colaboradorConta.Email };
                 var restult = await _userManager.CreateAsync(user, colaboradorConta.Password);
                 if (restult.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "admin");
                     await _signInManager.SignInAsync(user,isPersistent: false);
                     _context.Add( new ColaboradorConta { 
                     Email = colaboradorConta.Email,
