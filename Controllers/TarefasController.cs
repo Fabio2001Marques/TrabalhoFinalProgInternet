@@ -87,7 +87,8 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
-
+            var projeto = await _context.Projeto.FindAsync(tarefa.ProjetoId);
+            ViewBag.ProjetoId = tarefa.ProjetoId;
             return View(tarefa);
         }
 
@@ -97,7 +98,6 @@ namespace TrabalhoFinalProgInternet.Controllers
 
             var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
             ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
-            //ViewData["ColaboradorId"] = new SelectList(_context.ColaboradorProjeto.Where(p => p.ProjetoId == id), "ColaboradorId", "ColaboradorId");
             var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
             ViewBag.ProjetoNome = projeto.Nome;
             ViewBag.ProId = id;
@@ -147,15 +147,23 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
-            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa.FindAsync(id);
             if (tarefa == null)
             {
                 return NotFound();
             }
+
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+            var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == tarefa.ProjetoId).Include(c => c.Colaborador);
+            ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
+            
+            var projeto = await _context.Projeto.FindAsync(tarefa.ProjetoId);
+            ViewBag.ProId = tarefa.ProjetoId;
+            ViewBag.ProjetoNome = projeto.Nome;
+            ViewBag.TarefaId = tarefa.TarefaId;
             return View(tarefa);
+            
         }
 
         // POST: Tarefas/Edit/5
