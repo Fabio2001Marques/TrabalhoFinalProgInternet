@@ -14,6 +14,8 @@ namespace TrabalhoFinalProgInternet.Data
         private const string ADMIN_EMAIL = "admin@ipg.pt";
         private const string ADMIN_PASS = "Secret123$";
 
+        private const string ROLE_ADMINISTRATOR = "admin";
+        
 
         internal static void CreateDefaultAdmin(UserManager<IdentityUser> userManager)
         {
@@ -38,6 +40,23 @@ namespace TrabalhoFinalProgInternet.Data
         {
 
         }
+
+        internal static void CreateRoles(RoleManager<IdentityRole> roleManager)
+        {
+
+            EnsureRoleIsCreatedAsync(roleManager,ROLE_ADMINISTRATOR).Wait();
+
+        }
+        private static async Task EnsureRoleIsCreatedAsync(RoleManager<IdentityRole> roleManager,string role)
+        {
+            if (await roleManager.RoleExistsAsync(role)) return;
+
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+
+
+
+
 
 
         internal static void Populate(GestorProjetosContext gestorContext)
