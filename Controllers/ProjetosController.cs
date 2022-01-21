@@ -298,6 +298,12 @@ namespace TrabalhoFinalProgInternet
             }
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
         private bool ProjetoExists(int id)
         {
             return _context.Projeto.Any(e => e.ProjetoId == id);
