@@ -3,21 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrabalhoFinalProgInternet.Data;
 using TrabalhoFinalProgInternet.Models;
+using TrabalhoFinalProgInternet.ViewModels;
 
 namespace TrabalhoFinalProgInternet.Controllers
 {
     public class ColaboradorContasController : Controller
     {
         private readonly GestorProjetosContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ColaboradorContasController(GestorProjetosContext context)
+        public ColaboradorContasController(
+            GestorProjetosContext context,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: ColaboradorContas
@@ -58,12 +68,26 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("ColaboradorContaId,Name,Email,Phone")] ColaboradorConta colaboradorConta)
+        public async Task<IActionResult> Register(RegisterColaboradorContaViewModel colaboradorConta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(colaboradorConta);
-                await _context.SaveChangesAsync();
+                var user = new IdentityUser { UserName = colaboradorConta.Email, Email = colaboradorConta.Email };
+                var restult = await _userManager.CreateAsync(user, colaboradorConta.Password);
+                if (restult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user,isPersistent: false);
+                    _context.Add(colaboradorConta);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Index", "Projeto");
+                }
+
+                foreach(var error in restult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(colaboradorConta);
