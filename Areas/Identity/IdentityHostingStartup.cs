@@ -16,12 +16,7 @@ namespace TrabalhoFinalProgInternet.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<TrabalhoFinalProgInternetContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("TrabalhoFinalProgInternetContextConnection")));
-
-                services.AddDefaultIdentity<TrabalhoFinalProgInternetUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<TrabalhoFinalProgInternetContext>();
+                
             });
         }
     }
