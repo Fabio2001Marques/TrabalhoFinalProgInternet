@@ -182,6 +182,7 @@ namespace TrabalhoFinalProgInternet
             if (tarefas.Nome != null)
             {
                 ViewBag.Controller = "ColaboradorProjetos";
+                ViewBag.ProjetoId = ProjetoId;
                 ViewBag.Title = "Erro ao eliminar Colaborador";
                 ViewBag.Message = "Não pode eliminar um Colaborador que tenha uma tarefa ainda pendente";
                 return View("Erro");
