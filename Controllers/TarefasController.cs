@@ -231,7 +231,11 @@ namespace TrabalhoFinalProgInternet.Controllers
             var tarefa = await _context.Tarefa.FindAsync(id);
             _context.Tarefa.Remove(tarefa);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            ViewBag.Controller = "Tarefas";
+            ViewBag.ProjetoId = tarefa.ProjetoId;
+            ViewBag.Title = "Tarefa Eliminada";
+            ViewBag.Message = "Tarefa eliminada com sucesso";
+            return View("Sucesso");
         }
 
         [HttpPost]
