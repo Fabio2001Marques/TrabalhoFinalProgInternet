@@ -96,6 +96,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     Email = colaboradorConta.Email,
                     Name = colaboradorConta.Name,
                     Phone = colaboradorConta.Phone
+                   
 
                     });
 
