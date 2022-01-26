@@ -79,6 +79,22 @@ namespace TrabalhoFinalProgInternet
             
             if (ModelState.IsValid)
             {
+
+                var gestorProjetosContext = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Colaborador).Include(c => c.Projeto);
+            
+                foreach(ColaboradorProjeto x in gestorProjetosContext)
+                {
+                    if(x.ColaboradorId == colaboradorProjeto.ColaboradorId)
+                    {
+                        ModelState.AddModelError("ColaboradorId", "Colaborador já atribuído");
+                        var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+                        ViewBag.Projeto = projeto;
+                        ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
+                        ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
+                        return View(colaboradorProjeto);
+                    }
+                }
+
                 if (colaboradorProjeto.DataDeSaida >= colaboradorProjeto.DataDeInicio)
                 {
                     colaboradorProjeto.ProjetoId = id;
