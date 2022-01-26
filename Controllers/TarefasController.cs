@@ -132,6 +132,11 @@ namespace TrabalhoFinalProgInternet.Controllers
                 {
                     ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
                     ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+                    var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == id).Include(c => c.Colaborador);
+                    ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
+                    var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+                    ViewBag.ProjetoNome = projeto.Nome;
+                    ViewBag.ProId = id;
                     return View(tarefa);
                 }
             }

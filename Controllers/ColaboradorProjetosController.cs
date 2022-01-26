@@ -79,14 +79,26 @@ namespace TrabalhoFinalProgInternet
             
             if (ModelState.IsValid)
             {
-                colaboradorProjeto.ProjetoId = id;
-                _context.Add(colaboradorProjeto);
-                await _context.SaveChangesAsync();
-                ViewBag.Controller = "ColaboradorProjetos";
-                ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
-                ViewBag.Title = "Adicionado Colaborador";
-                ViewBag.Message = "Colaborador Adicionado com Sucesso";
-                return View("Sucesso");
+                if (colaboradorProjeto.DataDeSaida >= colaboradorProjeto.DataDeInicio)
+                {
+                    colaboradorProjeto.ProjetoId = id;
+                    _context.Add(colaboradorProjeto);
+                    await _context.SaveChangesAsync();
+                    ViewBag.Controller = "ColaboradorProjetos";
+                    ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
+                    ViewBag.Title = "Adicionado Colaborador";
+                    ViewBag.Message = "Colaborador Adicionado com Sucesso";
+                    return View("Sucesso");
+                }
+                else
+                {
+                    ModelState.AddModelError("DataDeSaida", "A Data de Saida tem de ser maior ou igual á Data de Entrada");
+                    var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+                    ViewBag.Projeto = projeto;
+                    ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
+                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
+                    return View(colaboradorProjeto);
+                }
             }
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", colaboradorProjeto.ProjetoId);
