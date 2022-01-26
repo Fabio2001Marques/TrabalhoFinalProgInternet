@@ -16,11 +16,14 @@ namespace TrabalhoFinalProgInternet.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Cartão de cidadão")]
+        //[RegularExpression(@"^[0-9]{8}[ -]*[0-9][A-Z]{2}[0-9]$", ErrorMessage = "Cartão de Cidadão inválido")]
+
         [StringLength(8, MinimumLength = 8, ErrorMessage ="Número de CC inválido")]
         [DisplayName("Cartão de Cidadão")]
         public string NumeroCC { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Contacto")]
+        //[RegularExpression(@"9[1236][0-9]{7}|2[1-9][0-9]{7}", ErrorMessage = "Cartão de Cidadão inválido")]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "Contacto inválido")]
         public string Contacto { get; set; }
 

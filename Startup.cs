@@ -111,6 +111,7 @@ namespace TrabalhoFinalProgInternet
             {
                 SeedData.SeedDevData(gestorContext);
                 SeedData.SeedDevUsersAsync(userManager).Wait();
+                SeedData.Populate(gestorContext);
             }
 
 

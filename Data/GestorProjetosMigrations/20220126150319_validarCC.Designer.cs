@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrabalhoFinalProgInternet.Data;
 
 namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 {
     [DbContext(typeof(GestorProjetosContext))]
-    partial class GestorProjetosContextModelSnapshot : ModelSnapshot
+    [Migration("20220126150319_validarCC")]
+    partial class validarCC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,8 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 
                     b.Property<string>("Contacto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -63,8 +66,7 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
 
                     b.Property<string>("NumeroCC")
                         .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ColaboradorId");
 
