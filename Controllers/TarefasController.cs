@@ -168,6 +168,9 @@ namespace TrabalhoFinalProgInternet.Controllers
             ViewBag.ProjetoNome = projeto.Nome;
             ViewBag.TarefaId = tarefas.TarefaId;
 
+            var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == tarefas.ProjetoId).Include(c => c.Colaborador);
+            ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
+
             var tarefa = await _context.Tarefa.FindAsync(id);
             if (tarefa == null)
             {
@@ -182,12 +185,18 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,DataInicio,DataFim,ProjetoId")] Tarefa tarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("TarefaId,Nome,Descricao,DataPrevistaInicio,DataPrevistaFim,DataInicio,DataFim,ColaboradorId")] Tarefa tarefa)
         {
             if (id != tarefa.TarefaId)
             {
                 return NotFound();
             }
+
+            var tarefas = await _context.Tarefa
+              .Include(t => t.Projeto)
+              .FirstOrDefaultAsync(m => m.TarefaId == id);
+
+            var colaboradores = _context.ColaboradorProjeto.Where(p => p.ProjetoId == tarefas.ProjetoId).Include(c => c.Colaborador);
 
             if (ModelState.IsValid)
             {
@@ -214,11 +223,15 @@ namespace TrabalhoFinalProgInternet.Controllers
                 {
                     ModelState.AddModelError("DataPrevistaFim", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
                     ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+                    
+                    ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
                     return View(tarefa);
                 }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", tarefa.ProjetoId);
+            
+            ViewData["ColaboradorNome"] = new SelectList(colaboradores, "ColaboradorId", "Colaborador.Nome");
             return View(tarefa);
         }
 
