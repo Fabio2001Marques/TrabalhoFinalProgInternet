@@ -275,7 +275,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Tarefas", new {id = tarefa.ProjetoId});
         }
 
         [HttpPost]
@@ -310,7 +310,7 @@ namespace TrabalhoFinalProgInternet.Controllers
                     throw;
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Tarefas", new { id = tarefa.ProjetoId });
         }
 
         private bool TarefaExists(int id)
