@@ -32,14 +32,14 @@ namespace TrabalhoFinalProgInternet.Controllers
 
         // GET: ColaboradorContas
 
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.ColaboradorConta.ToListAsync());
         }
 
         // GET: ColaboradorContas/Details/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
