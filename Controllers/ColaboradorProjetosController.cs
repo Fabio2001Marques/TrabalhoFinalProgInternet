@@ -74,12 +74,13 @@ namespace TrabalhoFinalProgInternet
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id,[Bind("ColaboradorId,DataDeInicio,DataDeSaida")] ColaboradorProjeto colaboradorProjeto)
+        public async Task<IActionResult> Create(int id,[Bind("ColaboradorId,DataDeInicio")] ColaboradorProjeto colaboradorProjeto)
         {
             
             if (ModelState.IsValid)
             {
 
+                colaboradorProjeto.DataDeSaida = null;
                 var gestorProjetosContext = _context.ColaboradorProjeto.Where(c => c.ProjetoId == id).Include(c => c.Colaborador).Include(c => c.Projeto);
             
                 foreach(ColaboradorProjeto x in gestorProjetosContext)
@@ -94,9 +95,6 @@ namespace TrabalhoFinalProgInternet
                         return View(colaboradorProjeto);
                     }
                 }
-
-                if (colaboradorProjeto.DataDeSaida >= colaboradorProjeto.DataDeInicio)
-                {
                     colaboradorProjeto.ProjetoId = id;
                     _context.Add(colaboradorProjeto);
                     await _context.SaveChangesAsync();
@@ -104,17 +102,7 @@ namespace TrabalhoFinalProgInternet
                     ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
                     ViewBag.Title = "Adicionado Colaborador";
                     ViewBag.Message = "Colaborador Adicionado com Sucesso";
-                    return View("Sucesso");
-                }
-                else
-                {
-                    ModelState.AddModelError("DataDeSaida", "A Data de Saida tem de ser maior ou igual á Data de Entrada");
-                    var projeto = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
-                    ViewBag.Projeto = projeto;
-                    ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome");
-                    ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", projeto.ProjetoId);
-                    return View(colaboradorProjeto);
-                }
+                    return View("Sucesso");                              
             }
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", colaboradorProjeto.ProjetoId);
@@ -228,6 +216,37 @@ namespace TrabalhoFinalProgInternet
             return View("Sucesso");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalizar(int ColaboradorId, int ProjetoId)
+        {
+
+            var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
+
+            colaboradorProjeto.DataDeSaida = DateTime.Now;
+
+            try
+            {
+                _context.Update(colaboradorProjeto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ColaboradorProjetoExists(colaboradorProjeto.ColaboradorId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            ViewBag.Controller = "ColaboradorProjetos";
+            ViewBag.ProjetoId = colaboradorProjeto.ProjetoId;
+            ViewBag.Title = "Colaborador saiu do Projeto";
+            ViewBag.Message = "Colaborador saiu do Projeto com sucesso à data de "+colaboradorProjeto.DataDeSaida;
+            return View("Sucesso");
+        }
         private bool ColaboradorProjetoExists(int id)
         {
             return _context.ColaboradorProjeto.Any(e => e.ColaboradorId == id);

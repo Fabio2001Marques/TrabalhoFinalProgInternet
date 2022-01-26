@@ -22,6 +22,6 @@ namespace TrabalhoFinalProgInternet.Models
 
         [DataType(DataType.Date, ErrorMessage = "Insira uma data válida")]
         [DisplayName("Data de Saída")]
-        public DateTime DataDeSaida { get; set; }
+        public DateTime? DataDeSaida { get; set; }
     }
 }
