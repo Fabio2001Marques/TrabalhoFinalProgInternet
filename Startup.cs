@@ -70,7 +70,8 @@ namespace TrabalhoFinalProgInternet
           }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GestorProjetosContext gestorContext,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+             RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -100,15 +101,19 @@ namespace TrabalhoFinalProgInternet
             });
 
 
-            SeedData.CreateDefaultAdmin(userManager);
+
+
+
+            SeedData.SeedRolesAsync(roleManager).Wait();
+            SeedData.SeedDefaultAdminAsync(userManager).Wait();
 
             if (env.IsDevelopment())
             {
-                SeedData.Populate(gestorContext);
-                SeedData.PopulateUsers(userManager);
+                SeedData.SeedDevData(gestorContext);
+                SeedData.SeedDevUsersAsync(userManager).Wait();
             }
 
-            
+
         }      
     }
 }

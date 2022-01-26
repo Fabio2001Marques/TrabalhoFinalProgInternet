@@ -70,20 +70,27 @@ namespace TrabalhoFinalProgInternet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterColaboradorContaViewModel colaboradorConta)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if(_userManager.FindByEmailAsync(colaboradorConta.Email) != null)
-                {
-                    ModelState.AddModelError("Email", "Ja existe um utilizador com esse nome");
-                    return View(colaboradorConta);
-                }
+                return View(colaboradorConta);
+            }
+
+            string username = colaboradorConta.Email;
+
+            IdentityUser user = await _userManager.FindByNameAsync(username);
+
+            if (user != null)
+            {
+                ModelState.AddModelError("Email", "Já existe um Colaborador com esse email.");
+                return View(colaboradorConta);
+            }
 
 
-                var user = new IdentityUser { UserName = colaboradorConta.Email, Email = colaboradorConta.Email };
-                var restult = await _userManager.CreateAsync(user, colaboradorConta.Password);
-                if (restult.Succeeded)
+             user = new IdentityUser { UserName = colaboradorConta.Email, Email = colaboradorConta.Email };
+                var result = await _userManager.CreateAsync(user, colaboradorConta.Password);
+                if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "admin");
+                    await _userManager.AddToRoleAsync(user, "Colaborador");
                     await _signInManager.SignInAsync(user,isPersistent: false);
                     _context.Add( new ColaboradorConta { 
                     Email = colaboradorConta.Email,
@@ -92,23 +99,23 @@ namespace TrabalhoFinalProgInternet.Controllers
 
                     });
 
-                    await _context.SaveChangesAsync();
+                
+                await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Projetos");
-                }
+                return RedirectToAction(nameof(Index), "Home");
+            }
 
-                foreach(var error in restult.Errors)
+                foreach(var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 
                 return RedirectToAction(nameof(Index));
-            }
-            return View(colaboradorConta);
+            
         }
 
         // GET: ColaboradorContas/Edit/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -129,7 +136,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ColaboradorContaId,Name,Email,Phone")] ColaboradorConta colaboradorConta)
         {
             if (id != colaboradorConta.ColaboradorContaId)
@@ -161,7 +168,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         }
 
         // GET: ColaboradorContas/Delete/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -182,7 +189,7 @@ namespace TrabalhoFinalProgInternet.Controllers
         // POST: ColaboradorContas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var colaboradorConta = await _context.ColaboradorConta.FindAsync(id);

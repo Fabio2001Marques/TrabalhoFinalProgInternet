@@ -79,7 +79,7 @@ namespace TrabalhoFinalProgInternet
         }
 
         // GET: Projetos/Create
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
              var Colaboradores = new SelectList(_context.Colaborador.Where<Colaborador>(s =>s.Cargo.Nome =="Gestor"), "ColaboradorId", "Nome", "Cargo") ;
@@ -95,7 +95,7 @@ namespace TrabalhoFinalProgInternet
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicialPrevista,DataFinalPrevista,ColaboradorId")] Projeto projeto)
         {
