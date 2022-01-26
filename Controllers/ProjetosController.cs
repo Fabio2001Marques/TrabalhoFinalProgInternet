@@ -118,7 +118,8 @@ namespace TrabalhoFinalProgInternet
                 else
                 {
                     ModelState.AddModelError("DataFinalPrevista", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
-
+                    var Colaboradores = new SelectList(_context.Colaborador.Where<Colaborador>(s => s.Cargo.Nome == "Gestor"), "ColaboradorId", "Nome", "Cargo");
+                    ViewData["ColaboradorId"] = Colaboradores;
                     return View(projeto);
                 }
             }
