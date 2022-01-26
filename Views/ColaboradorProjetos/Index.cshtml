@@ -43,15 +43,23 @@
                         @Html.DisplayFor(modelItem => item.DataDeSaida)
                     </td>
                     <td>
-                        @if (item.DataDeSaida == null)
-                        {
-                        <form asp-action="Finalizar" asp-route-ProjetoId="@item.ProjetoId" asp-route-ColaboradorId="@item.ColaboradorId">                            
-                            <div class="form-group">
-                                <input type="submit" value="Finalizar" class="btn btn-primary" />
-                            </div>
-                        </form>
-                        }                   
-                        <a asp-action="Delete" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Eliminar</a>
+                    <table>
+                        <tr>
+                            <td>
+                                @if (item.DataDeSaida == null)
+                                {
+                                <form asp-action="Finalizar" asp-route-ProjetoId="@item.ProjetoId" asp-route-ColaboradorId="@item.ColaboradorId">                            
+                                    <div class="form-group">
+                                        <input type="submit" value="Finalizar" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Eliminar</a>
+                            </td>
+                        </tr>
+                    </table>
                     </td>
                 </tr>
             }
