@@ -76,6 +76,31 @@ namespace TrabalhoFinalProgInternet.Data.GestorProjetosMigrations
                     b.ToTable("Colaborador");
                 });
 
+            modelBuilder.Entity("TrabalhoFinalProgInternet.Models.ColaboradorConta", b =>
+                {
+                    b.Property<int>("ColaboradorContaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ColaboradorContaId");
+
+                    b.ToTable("ColaboradorConta");
+                });
+
             modelBuilder.Entity("TrabalhoFinalProgInternet.Models.ColaboradorProjeto", b =>
                 {
                     b.Property<int>("ColaboradorId")

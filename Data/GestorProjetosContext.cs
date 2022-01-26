@@ -56,6 +56,8 @@ namespace TrabalhoFinalProgInternet.Data
 
         public DbSet<TrabalhoFinalProgInternet.Models.ColaboradorProjeto> ColaboradorProjeto { get; set; }
 
+        public DbSet<TrabalhoFinalProgInternet.Models.ColaboradorConta> ColaboradorConta { get; set; }
+
 
     }
 }

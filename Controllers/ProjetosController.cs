@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -78,6 +79,7 @@ namespace TrabalhoFinalProgInternet
         }
 
         // GET: Projetos/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
              var Colaboradores = new SelectList(_context.Colaborador.Where<Colaborador>(s =>s.Cargo.Nome =="Gestor"), "ColaboradorId", "Nome", "Cargo") ;
@@ -93,6 +95,7 @@ namespace TrabalhoFinalProgInternet
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjetoId,Nome,DataInicialPrevista,DataFinalPrevista,ColaboradorId")] Projeto projeto)
         {
@@ -295,6 +298,12 @@ namespace TrabalhoFinalProgInternet
             }
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
         private bool ProjetoExists(int id)
         {
             return _context.Projeto.Any(e => e.ProjetoId == id);
