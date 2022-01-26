@@ -185,7 +185,8 @@ namespace TrabalhoFinalProgInternet
                 else
                 {
                     ModelState.AddModelError("DataFinalPrevista", "A Data Prevista de Fim tem de ser maior ou igual á Data Prevista de Início");
-                    
+                    var Colaboradores = new SelectList(_context.Colaborador.Where<Colaborador>(s => s.Cargo.Nome == "Gestor"), "ColaboradorId", "Nome", "Cargo");
+                    ViewData["ColaboradorId"] = Colaboradores;
                     return View(projeto);
                 }
                 return RedirectToAction(nameof(Index));
@@ -201,7 +202,7 @@ namespace TrabalhoFinalProgInternet
                 return NotFound();
             }
 
-            var projeto = await _context.Projeto
+            var projeto = await _context.Projeto.Include(t => t.colaborador)
                 .FirstOrDefaultAsync(m => m.ProjetoId == id);
             if (projeto == null)
             {
