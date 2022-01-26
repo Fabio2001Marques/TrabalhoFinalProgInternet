@@ -46,6 +46,44 @@
                 @Html.DisplayFor(model => model.DataFinal)
             </dd>
             <dt class="col-sm-2">
+            Estado
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.DataInicio == null)
+            {
+                if (DateTime.Now < Model.DataInicialPrevista)
+                {
+                    <p>Dentro do prazo em Espera</p>
+                }
+                else
+                {
+                    <p>Atrasado em Espera</p>
+                }
+            }
+            else if (Model.DataFinal == null)
+            {
+                if (DateTime.Now < Model.DataInicialPrevista)
+                {
+                    <p>Dentro do prazo em Andamento</p>
+                }
+                else
+                {
+                    <p>Atrasado em Andamento</p>
+                }
+            }
+            else
+            {
+                if (Model.DataFinal < Model.DataFinalPrevista)
+                {
+                    <p>Concluído dentro do prazo</p>
+                }
+                else
+                {
+                    <p>Concluído com atrasos</p>
+                }
+            }
+        </dd>
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ColaboradorId)
             </dt>
             <dd class="col-sm-10">
