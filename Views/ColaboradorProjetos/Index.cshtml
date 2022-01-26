@@ -43,7 +43,14 @@
                         @Html.DisplayFor(modelItem => item.DataDeSaida)
                     </td>
                     <td>
-                        @*@Html.ActionLink("Delete", "Delete", new { idP=item.ProjetoId, idC=item.ColaboradorId }) @*Perguntar ao stor*@
+                        @if (item.DataDeSaida == null)
+                        {
+                        <form asp-action="Finalizar" asp-route-ProjetoId="@item.ProjetoId" asp-route-ColaboradorId="@item.ColaboradorId">                            
+                            <div class="form-group">
+                                <input type="submit" value="Finalizar" class="btn btn-primary" />
+                            </div>
+                        </form>
+                        }                   
                         <a asp-action="Delete" asp-route-id="@item.ColaboradorId" class="btn btn-secondary">Eliminar</a>
                     </td>
                 </tr>
