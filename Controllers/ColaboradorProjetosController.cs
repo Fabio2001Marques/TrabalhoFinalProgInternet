@@ -95,6 +95,7 @@ namespace TrabalhoFinalProgInternet
                         return View(colaboradorProjeto);
                     }
                 }
+                
                     colaboradorProjeto.ProjetoId = id;
                     _context.Add(colaboradorProjeto);
                     await _context.SaveChangesAsync();
@@ -104,8 +105,11 @@ namespace TrabalhoFinalProgInternet
                     ViewBag.Message = "Colaborador Adicionado com Sucesso";
                     return View("Sucesso");                              
             }
+            
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", colaboradorProjeto.ProjetoId);
+            var projetoId = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.Projeto = projetoId;
             return View(colaboradorProjeto);
         }
 
@@ -195,17 +199,17 @@ namespace TrabalhoFinalProgInternet
         {
 
            
-            var tarefas = _context.Tarefa.Where(c => c.ColaboradorId == ColaboradorId).Where(d => d.DataFim == null).FirstOrDefault();
+            //var tarefas = _context.Tarefa.Where(c => c.ColaboradorId == ColaboradorId).Where(d => d.DataFim == null).FirstOrDefault();
 
 
-            if (tarefas.Nome != null)
-            {
-                ViewBag.Controller = "ColaboradorProjetos";
-                ViewBag.ProjetoId = ProjetoId;
-                ViewBag.Title = "Erro ao eliminar Colaborador";
-                ViewBag.Message = "Não pode eliminar um Colaborador que tenha uma tarefa ainda pendente";
-                return View("Erro");
-            }
+            //if (tarefas.Nome != null)
+            //{
+            //    ViewBag.Controller = "ColaboradorProjetos";
+            //    ViewBag.ProjetoId = ProjetoId;
+            //    ViewBag.Title = "Erro ao eliminar Colaborador";
+            //    ViewBag.Message = "Não pode eliminar um Colaborador que tenha uma tarefa ainda pendente";
+            //    return View("Erro");
+            //}
             var colaboradorProjeto = await _context.ColaboradorProjeto.FirstOrDefaultAsync(m => m.ColaboradorId == ColaboradorId && m.ProjetoId == ProjetoId);
             _context.ColaboradorProjeto.Remove(colaboradorProjeto);
             await _context.SaveChangesAsync();
