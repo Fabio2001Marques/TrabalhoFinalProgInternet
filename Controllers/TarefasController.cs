@@ -79,10 +79,16 @@ namespace TrabalhoFinalProgInternet.Controllers
                 return NotFound();
             }
 
-
             var tarefa = await _context.Tarefa
-                .Include(t => t.Projeto)
-                .FirstOrDefaultAsync(m => m.TarefaId == id);
+               .Include(t => t.Projeto)
+               .FirstOrDefaultAsync(m => m.TarefaId == id);
+
+
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == tarefa.ProjetoId).FirstOrDefault();
+            ViewBag.ProjetoNome = projeto.Nome;
+            ViewBag.ProId = projeto.ProjetoId;
+
+           
             if (tarefa == null)
             {
                 return NotFound();
@@ -154,6 +160,14 @@ namespace TrabalhoFinalProgInternet.Controllers
             }
             ViewBag.ProId = id;
 
+            var tarefas = await _context.Tarefa
+               .Include(t => t.Projeto)
+               .FirstOrDefaultAsync(m => m.TarefaId == id);
+
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == tarefas.ProjetoId).FirstOrDefault();
+            ViewBag.ProjetoNome = projeto.Nome;
+            ViewBag.TarefaId = tarefas.TarefaId;
+
             var tarefa = await _context.Tarefa.FindAsync(id);
             if (tarefa == null)
             {
@@ -215,11 +229,15 @@ namespace TrabalhoFinalProgInternet.Controllers
             {
                 return NotFound();
             }
-            ViewBag.ProId = id;
 
             var tarefa = await _context.Tarefa
-                .Include(t => t.Projeto)
-                .FirstOrDefaultAsync(m => m.TarefaId == id);
+               .Include(t => t.Projeto)
+               .FirstOrDefaultAsync(m => m.TarefaId == id);
+
+            var projeto = _context.Projeto.Where(c => c.ProjetoId == tarefa.ProjetoId).FirstOrDefault();
+            ViewBag.ProjetoNome = projeto.Nome;
+            ViewBag.ProId = projeto.ProjetoId;
+
             if (tarefa == null)
             {
                 return NotFound();
