@@ -95,6 +95,7 @@ namespace TrabalhoFinalProgInternet
                         return View(colaboradorProjeto);
                     }
                 }
+                
                     colaboradorProjeto.ProjetoId = id;
                     _context.Add(colaboradorProjeto);
                     await _context.SaveChangesAsync();
@@ -104,8 +105,11 @@ namespace TrabalhoFinalProgInternet
                     ViewBag.Message = "Colaborador Adicionado com Sucesso";
                     return View("Sucesso");                              
             }
+            
             ViewData["ColaboradorNome"] = new SelectList(_context.Colaborador, "ColaboradorId", "Nome", colaboradorProjeto.ColaboradorId);
             ViewData["ProjetoId"] = new SelectList(_context.Projeto, "ProjetoId", "Nome", colaboradorProjeto.ProjetoId);
+            var projetoId = _context.Projeto.Where(c => c.ProjetoId == id).FirstOrDefault();
+            ViewBag.Projeto = projetoId;
             return View(colaboradorProjeto);
         }
 
