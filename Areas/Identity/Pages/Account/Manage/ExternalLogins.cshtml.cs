@@ -6,18 +6,17 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TrabalhoFinalProgInternet.Areas.Identity.Data;
 
 namespace TrabalhoFinalProgInternet.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<TrabalhoFinalProgInternetUser> _userManager;
-        private readonly SignInManager<TrabalhoFinalProgInternetUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<TrabalhoFinalProgInternetUser> userManager,
-            SignInManager<TrabalhoFinalProgInternetUser> signInManager)
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

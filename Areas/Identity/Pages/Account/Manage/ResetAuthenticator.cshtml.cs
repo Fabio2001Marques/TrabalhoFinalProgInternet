@@ -6,19 +6,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using TrabalhoFinalProgInternet.Areas.Identity.Data;
 
 namespace TrabalhoFinalProgInternet.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<TrabalhoFinalProgInternetUser> _userManager;
-        private readonly SignInManager<TrabalhoFinalProgInternetUser> _signInManager;
+        UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<TrabalhoFinalProgInternetUser> userManager,
-            SignInManager<TrabalhoFinalProgInternetUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

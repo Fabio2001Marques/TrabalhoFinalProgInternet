@@ -11,47 +11,69 @@ namespace TrabalhoFinalProgInternet.Data
     {
 
 
-        private const string ADMIN_EMAIL = "admin@ipg.pt";
-        private const string ADMIN_PASS = "Secret123$";
+        private const string DEFAULT_ADMIN_USER = "admin@ipg.pt";
+        private const string DEFAULT_ADMIN_PASSWORD = "Secret123$";
 
-        private const string ROLE_ADMINISTRATOR = "admin";
-        
+        private const string ROLE_ADMINISTRATOR = "Admin";
+        private const string ROLE_COLABORADOR = "Colaborador";
+        private const string ROLE_GESTOR = "Gestor";
 
-        internal static void CreateDefaultAdmin(UserManager<IdentityUser> userManager)
+        internal static async Task SeedDefaultAdminAsync(UserManager<IdentityUser> userManager)
         {
-            EnsureUserIsCreatedAsync(userManager, ADMIN_EMAIL, ADMIN_PASS).Wait();
+            await EnsureUserIsCreated(userManager, DEFAULT_ADMIN_USER, DEFAULT_ADMIN_PASSWORD, ROLE_ADMINISTRATOR);
         }
 
-        private static async Task EnsureUserIsCreatedAsync(UserManager<IdentityUser> userManager, string email, string password)
+        private static async Task EnsureUserIsCreated(UserManager<IdentityUser> userManager, string username, string password, string role)
         {
-            var user = await userManager.FindByNameAsync(email);
-            if (user != null) return;
+            IdentityUser user = await userManager.FindByNameAsync(username);
 
-            user = new IdentityUser
+            if (user == null)
             {
-                UserName = email,
-                Email = email
-            };
+                user = new IdentityUser(username);
+                await userManager.CreateAsync(user, password);
+            }
 
-            await userManager.CreateAsync(user, password);
+            if (!await userManager.IsInRoleAsync(user, role))
+            {
+                await userManager.AddToRoleAsync(user, role);
+            }
         }
 
-        internal static void PopulateUsers(UserManager<IdentityUser> userManager)
+        internal static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
         {
-
+            await EnsureRoleIsCreated(roleManager, ROLE_ADMINISTRATOR);
+            await EnsureRoleIsCreated(roleManager, ROLE_COLABORADOR);
+            await EnsureRoleIsCreated(roleManager, ROLE_GESTOR);
         }
 
-        internal static void CreateRoles(RoleManager<IdentityRole> roleManager)
+        private static async Task EnsureRoleIsCreated(RoleManager<IdentityRole> roleManager, string role)
         {
-
-            EnsureRoleIsCreatedAsync(roleManager,ROLE_ADMINISTRATOR).Wait();
-
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
         }
-        private static async Task EnsureRoleIsCreatedAsync(RoleManager<IdentityRole> roleManager,string role)
-        {
-            if (await roleManager.RoleExistsAsync(role)) return;
 
-            await roleManager.CreateAsync(new IdentityRole(role));
+        internal static async Task SeedDevUsersAsync(UserManager<IdentityUser> userManager)
+        {
+
+            //await EnsureUserIsCreated(userManager, "john@ipg.pt", "Secret123$", ROLE_COLABORADOR);
+            //await EnsureUserIsCreated(userManager, "mary@ipg.pt", "Secret123$", ROLE_GESTOR);
+        }
+
+        internal static void SeedDevData(GestorProjetosContext db)
+        {
+
+            //if (db.Colaborador.Any()) return;
+
+            //db.Colaborador.Add(new Colaborador
+            //{
+            //    Nome = "Mary",
+            //    Email = "mary@ipg.pt"
+            //});
+
+            //db.SaveChanges();
+
         }
 
 
