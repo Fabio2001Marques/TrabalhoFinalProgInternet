@@ -177,9 +177,10 @@ namespace TrabalhoFinalProgInternet
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int ColaboradorId, int ProjetoId)
         {
-            var tarefas = _context.Tarefa.Where(c => c.ColaboradorId == ColaboradorId).FirstOrDefault();
-            
-            if (tarefas.DataFim != null)
+           
+            var tarefas = _context.Tarefa.Where(c => c.ColaboradorId == ColaboradorId).Where(d => d.DataFim == null).FirstOrDefault();
+
+            if (tarefas.Nome != null)
             {
                 ViewBag.Controller = "ColaboradorProjetos";
                 ViewBag.Title = "Erro ao eliminar Colaborador";
